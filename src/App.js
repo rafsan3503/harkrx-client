@@ -1,23 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { RouterProvider } from "react-router-dom";
+import router from "./routes/Router";
+import { useContext } from "react";
+import { AuthContext } from "./UserContext";
 
 function App() {
+  const { theme } = useContext(AuthContext);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="bg-base-200" data-theme={theme}>
+      <RouterProvider router={router} />
     </div>
   );
 }
