@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 import { FaPencilAlt } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../UserContext";
 import Post from "./Post";
 
 const UserFeed = () => {
-  const email = "rafsanchowdhuryrudro@gmail.co";
   const { user } = useContext(AuthContext);
+  const userProfile = useLoaderData();
+  console.log(userProfile);
 
   return (
     <section>
@@ -17,7 +18,7 @@ const UserFeed = () => {
             alt=""
             className="h-80 rounded-xl w-full object-cover"
           />
-          {user.email === email && (
+          {user.email === userProfile.email && (
             <div className="p-4 absolute top-10 right-10 text-green-400 bg-white rounded-full border border-green-400">
               <FaPencilAlt className="text-xl" />
             </div>
@@ -27,15 +28,15 @@ const UserFeed = () => {
         <div className="-mt-32">
           <div className="avatar pl-14">
             <div className="w-48 rounded-full ring ring-white ring-offset-base-100 ring-offset-2">
-              <img src="https://placeimg.com/192/192/people" />
+              <img src={userProfile.img} alt="" />
             </div>
           </div>
         </div>
 
-        <div className="flex justify-between px-14 pt-6 mb-8">
+        <div className="flex relative justify-between px-14 pt-6 mb-8">
           <div className="flex gap-6">
             <div>
-              <h2 className="text-5xl font-bold">Emma Watson</h2>
+              <h2 className="text-5xl font-bold">{userProfile.name}</h2>
               <p className="text-xl mt-3">
                 Mern Stack Web Developer || React Js || Javascript || Mongo DB
                 || Node Js
@@ -47,7 +48,7 @@ const UserFeed = () => {
                 </Link>
               </p>
               <div className="flex gap-4">
-                {user.email === email && (
+                {user.email === userProfile.email && (
                   <div className="p-4 absolute top-10 right-10 text-green-400 bg-white rounded-full border border-green-400">
                     <FaPencilAlt className="text-xl" />
                   </div>
@@ -56,7 +57,7 @@ const UserFeed = () => {
             </div>
           </div>
           <div>
-            {user.email === email && (
+            {user.email === userProfile.email && (
               <div className="p-4 absolute top-10 right-10 text-green-400 bg-white rounded-full border border-green-400">
                 <FaPencilAlt className="text-xl" />
               </div>
@@ -64,10 +65,10 @@ const UserFeed = () => {
           </div>
         </div>
       </div>
-      <section className="mt-6 border border-green-400 rounded-lg bg-white">
+      <section className="mt-6 relative border border-green-400 rounded-lg bg-white">
         <div className="flex justify-between px-10 py-4 w-full items-center mt-6">
           <h2 className="text-3xl font-medium">About</h2>
-          {user.email === email && (
+          {user.email === userProfile.email && (
             <div className="p-4 absolute top-10 right-10 text-green-400 bg-white rounded-full border border-green-400">
               <FaPencilAlt className="text-xl" />
             </div>
@@ -78,10 +79,10 @@ const UserFeed = () => {
           commodi quaerat distinctio vel saepe eaque inventore odio consequatur?
         </p>
       </section>
-      <section className="mt-6 border border-green-400 rounded-lg bg-white">
+      <section className="mt-6 relative border border-green-400 rounded-lg bg-white">
         <div className="flex justify-between px-10 py-4 w-full items-center mt-6">
           <h2 className="text-3xl font-medium">Posts</h2>
-          {user.email === email && (
+          {user.email === userProfile.email && (
             <div className="p-4 absolute top-10 right-10 text-green-400 bg-white rounded-full border border-green-400">
               <FaPencilAlt className="text-xl" />
             </div>

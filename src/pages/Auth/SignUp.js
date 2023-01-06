@@ -50,7 +50,7 @@ const SignUp = () => {
                   email,
                   img,
                 };
-                fetch("http://localhost:5000/users", {
+                fetch("https://harkrx-server.vercel.app/users", {
                   method: "POST",
                   headers: {
                     "content-type": "application/json",
@@ -88,7 +88,7 @@ const SignUp = () => {
           email: res?.user?.email,
           img: res?.user?.photoURL,
         };
-        fetch("http://localhost:5000/users", {
+        fetch("https://harkrx-server.vercel.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -119,7 +119,7 @@ const SignUp = () => {
           email: res?.user?.email,
           img: res?.user?.photoURL,
         };
-        fetch("http://localhost:5000/users", {
+        fetch("https://harkrx-server.vercel.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",
