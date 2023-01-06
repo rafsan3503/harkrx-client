@@ -5,7 +5,7 @@ import { AuthContext } from "../UserContext";
 
 const Feed = () => {
   const { users } = useContext(AuthContext);
-  console.log(users);
+
   return (
     <div className="card bg-base-100 border border-green-400 shadow-xl">
       <div>

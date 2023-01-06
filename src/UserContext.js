@@ -32,7 +32,7 @@ const UserContext = ({ children }) => {
   const [theme, setTheme] = useState("light");
   // users
   const [users, setUsers] = useState([]);
-  // loggen in user
+  // logged in user
   const [loggedUser, setLoggedUser] = useState({});
 
   // user inspection
@@ -53,9 +53,11 @@ const UserContext = ({ children }) => {
 
   // get logged in user
   useEffect(() => {
-    fetch(`http://localhost:5000/single-user?email=${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => setLoggedUser(data));
+    if (user?.email) {
+      fetch(`http://localhost:5000/single-user?email=${user?.email}`)
+        .then((res) => res.json())
+        .then((data) => setLoggedUser(data));
+    }
   }, [user?.email]);
 
   // create user

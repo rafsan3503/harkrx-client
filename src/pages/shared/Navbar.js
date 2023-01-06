@@ -8,7 +8,7 @@ import { AuthContext } from "../../UserContext";
 import { Switch } from "@headlessui/react";
 
 const Navbar = () => {
-  const { user, logOut, setTheme } = useContext(AuthContext);
+  const { loggedUser, logOut, setTheme } = useContext(AuthContext);
   const [isDark, setIsDark] = useState(false);
 
   const handleLogout = () => {
@@ -42,10 +42,7 @@ const Navbar = () => {
             <FaHome className="text-xl" />
             <p>Home</p>
           </Link>
-          <Link
-            to="/user"
-            className="flex flex-col items-center cursor-pointer text-green-400"
-          >
+          <Link className="flex flex-col items-center cursor-pointer text-green-400">
             <FaUser className="text-xl" />
             <div className="dropdown dropdown-hover">
               <label tabIndex={0}>Profile</label>
@@ -54,7 +51,7 @@ const Navbar = () => {
                 className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
               >
                 <li>
-                  <Link to="/user/63b6f62f395f51efdc15462a">View Profile</Link>
+                  <Link to={`/user/${loggedUser._id}`}>View Profile</Link>
                 </li>
               </ul>
             </div>
