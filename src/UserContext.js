@@ -12,6 +12,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import app from "./firebase.config";
+import { useQuery } from "@tanstack/react-query";
 
 // Create Context
 export const AuthContext = createContext();
@@ -31,9 +32,9 @@ const UserContext = ({ children }) => {
   // theme
   const [theme, setTheme] = useState("light");
   // users
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
   // logged in user
-  const [loggedUser, setLoggedUser] = useState({});
+  // const [loggedUser, setLoggedUser] = useState({});
 
   // user inspection
   useEffect(() => {
@@ -45,20 +46,20 @@ const UserContext = ({ children }) => {
     return () => unsubscribe;
   }, []);
 
-  useEffect(() => {
-    fetch("https://harkrx-server.vercel.app/users")
-      .then((res) => res.json())
-      .then((data) => setUsers(data));
-  }, []);
+  // useEffect(() => {
+  //   fetch("https://harkrx-server.vercel.app/users")
+  //     .then((res) => res.json())
+  //     .then((data) => setUsers(data));
+  // }, []);
 
   // get logged in user
-  useEffect(() => {
-    if (user?.email) {
-      fetch(`https://harkrx-server.vercel.app/single-user?email=${user?.email}`)
-        .then((res) => res.json())
-        .then((data) => setLoggedUser(data));
-    }
-  }, [user?.email]);
+  // useEffect(() => {
+  //   if (user?.email) {
+  //     fetch(`https://harkrx-server.vercel.app/single-user?email=${user?.email}`)
+  //       .then((res) => res.json())
+  //       .then((data) => setLoggedUser(data));
+  //   }
+  // }, [user?.email]);
 
   // create user
   const createUser = (email, password) => {
@@ -110,8 +111,8 @@ const UserContext = ({ children }) => {
     logOut,
     theme,
     setTheme,
-    users,
-    loggedUser,
+    // users,
+    // loggedUser,
   };
   return (
     <div>

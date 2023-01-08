@@ -1,19 +1,37 @@
-import React, { useContext } from "react";
+import { useQuery } from "@tanstack/react-query";
+import React, { useContext, useEffect, useState } from "react";
 import { FaInfo, FaPlus, FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../UserContext";
 
 const Feed = () => {
-  const { users } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    fetch(`https://harkrx-server.vercel.app/users?email=${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setUsers(data);
+      });
+  }, [user?.email]);
+
+  // console.log(users);
+  const userList = users?.filter((usr) => usr.email !== user.email);
+  console.log(userList);
+
+  // const { loggedUser } = useContext(AuthContext);
 
   return (
-    <div className="card bg-base-100 border border-green-400 shadow-xl">
+    <div className="card bg-base-100 border border-teal-300 shadow-xl ">
       <div>
         <div className="card-body">
           <h2 className="card-title flex justify-between">
             Add to your feed <FaInfo />
           </h2>
-          {users.map((user) => (
+          {userList.map((user) => (
             <Link
               to={`/user/${user._id}`}
               key={user._id}
@@ -30,7 +48,7 @@ const Feed = () => {
                   Managing Director of Noman Group of Industries & Talha Group |
                   CIP |
                 </small>
-                <button className="btn btn-outline rounded-full text-green-400 flex gap-2 items-center mt-4">
+                <button className="btn btn-outline rounded-full text-teal-400 flex gap-2 items-center mt-4">
                   <FaPlus /> Follow
                 </button>
               </div>

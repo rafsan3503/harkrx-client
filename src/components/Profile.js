@@ -1,12 +1,26 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import useLoggedUser from "../hooks/useLoggedUser";
 import { AuthContext } from "../UserContext";
 
 const Profile = () => {
-  const { loggedUser } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+
+  const [loggedUser] = useLoggedUser(user?.email);
+  // const [loggedUser, setLoggedUser] = useState({});
+
+  // useEffect(() => {
+  //   if (user?.email) {
+  //     fetch(`https://harkrx-server.vercel.app/single-user?email=${user?.email}`)
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         setLoggedUser(data);
+  //       });
+  //   }
+  // }, [user?.email]);
 
   return (
-    <div>
-      <div className="border border-green-400 rounded-lg bg-white overflow-hidden">
+    <div className="sticky top-0">
+      <div className="border border-teal-300 rounded-lg bg-base-100 overflow-hidden">
         <img src={loggedUser.img} alt="" className="h-28 object-cover w-full" />
         <div className="avatar -mt-12 flex justify-center">
           <div className="w-24 rounded-full">
@@ -30,8 +44,8 @@ const Profile = () => {
           </button>
         </div>
       </div>
-      <div className="border border-green-400 rounded-lg bg-white overflow-hidden mt-4 ">
-        <ul className="menu menu-compact lg:menu-normal bg-base-100 w-full p-2 rounded-box">
+      <div className="border border-teal-300 rounded-lg overflow-hidden mt-4 ">
+        <ul className="menu menu-compact lg:menu-normal bg-base-100 w-full p-2 rounded-box ">
           <li>
             <a>Groups</a>
           </li>
