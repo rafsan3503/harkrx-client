@@ -7,7 +7,10 @@ import { AuthContext } from "./UserContext";
 function App() {
   const { theme } = useContext(AuthContext);
   return (
-    <div className="bg-base-200" data-theme={theme}>
+    <div
+      className="bg-gradient-to-bl from-green-400 via-indigo-400 to-green-400"
+      data-theme={theme}
+    >
       <RouterProvider router={router} />
     </div>
   );
