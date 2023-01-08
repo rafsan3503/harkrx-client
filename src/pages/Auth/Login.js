@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import login from "../../assets/login.gif";
+import login from "../../assets/pngwing.com.png";
 import { AuthContext } from "../../UserContext";
 import AuthNavbar from "./AuthNavbar";
 
@@ -84,12 +84,12 @@ const Login = () => {
   return (
     <section>
       <AuthNavbar />
-      <section className="flex min-h-screen">
-        <aside className="w-[45%]">
-          <img src={login} alt="" className="h-full w-full" />
+      <section className="flex min-h-screen container mx-auto">
+        <aside className="w-full ">
+          <img src={login} alt="" className="mx-auto" />
         </aside>
-        <div className="w-[55%] flex justify-center items-center">
-          <div className="bg-white w-1/2 mx-auto py-6 sm:py-8 lg:py-12">
+        <div className="w-full flex justify-center items-center">
+          <div className="w-full lg:w-9/12 mx-auto py-6 sm:py-8 lg:py-12">
             <div className="w-full px-4 md:px-8 mx-auto">
               <h2 className="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8">
                 Join Now
@@ -97,7 +97,7 @@ const Login = () => {
 
               <form
                 onSubmit={handleSubmit}
-                className="w-full border rounded-lg mx-auto"
+                className="w-full border rounded-xl shadow-lg mx-auto"
               >
                 <div className="flex flex-col gap-4 p-4 md:p-8">
                   <div>
@@ -125,6 +125,7 @@ const Login = () => {
                       onChange={handlePassword}
                       required
                       name="password"
+                      type="password"
                       className="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
                     />
                     {error && (
@@ -145,7 +146,7 @@ const Login = () => {
 
                   <div className="flex justify-center items-center relative">
                     <span className="h-px bg-gray-300 absolute inset-x-0"></span>
-                    <span className="bg-white text-gray-400 text-sm relative px-4">
+                    <span className="bg-base-100 text-gray-400 text-sm relative px-4">
                       Log in with social
                     </span>
                   </div>
@@ -178,10 +179,10 @@ const Login = () => {
 
                   <button
                     onClick={handleGoogle}
-                    className="flex justify-center items-center bg-white hover:bg-gray-100 active:bg-gray-200 border border-gray-300 focus-visible:ring ring-gray-300 text-gray-800 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 gap-2 px-8 py-3"
+                    className="flex justify-center items-center bg-base-100 hover:bg-gray-100 active:bg-gray-200 border border-gray-300 focus-visible:ring ring-gray-300 text-gray-800 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 gap-2 px-8 py-3"
                   >
                     {loading ? (
-                      <div className="w-8 h-8 border-4 border-dashed rounded-full animate-spin dark:border-green-400"></div>
+                      <div className="w-8 h-8 border-4 border-dashed rounded-full animate-spin dark:border-teal-300"></div>
                     ) : (
                       <>
                         <svg
@@ -215,12 +216,12 @@ const Login = () => {
                   </button>
                 </div>
 
-                <div className="flex justify-center items-center bg-gray-100 p-4">
+                <div className="flex justify-center items-center bg-gray-100 p-4 mb-10">
                   <p className="text-gray-500 text-sm text-center">
                     Don't have an account?{" "}
                     <Link
                       to="/signup"
-                      className="text-indigo-500 hover:text-indigo-600 active:text-indigo-700 transition duration-100"
+                      className="text-indigo-500 hover:text-indigo-600 active:text-indigo-700 transition duration-100 font-bold"
                     >
                       Register
                     </Link>
