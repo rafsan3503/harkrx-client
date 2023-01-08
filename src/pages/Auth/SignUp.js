@@ -2,13 +2,14 @@ import { axios } from "axios";
 import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import signup from "../../assets/signup.gif";
+import signup from "../../assets/pngwing.com (1).png";
 import { AuthContext } from "../../UserContext";
 import AuthNavbar from "./AuthNavbar";
 
 const SignUp = () => {
   const { googleLogin, facebookLogin, createUser, updateUser } =
     useContext(AuthContext);
+  // console.log(refetch);
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -63,6 +64,7 @@ const SignUp = () => {
                   });
                 Swal.fire("Success", "User created successfully", "success");
                 setLoading(false);
+
                 navigate("/");
               })
               .catch((err) => {
@@ -101,6 +103,7 @@ const SignUp = () => {
           });
         Swal.fire("Success", "Google Log In", "success");
         setLoading(false);
+
         navigate("/");
       })
       .catch((err) => {
@@ -132,6 +135,7 @@ const SignUp = () => {
           });
         Swal.fire("Success", "Facebook Log In", "success");
         setLoading(false);
+
         navigate("/");
       })
       .catch((err) => {
@@ -160,14 +164,14 @@ const SignUp = () => {
     setPassword(pass);
   };
   return (
-    <section>
+    <section >
       <AuthNavbar />
-      <section className="flex flex-col lg:flex-row min-h-screen">
-        <aside className="w-full lg:w-[45%]">
-          <img src={signup} alt="" className="h-full w-full" />
+      <section className="flex flex-col lg:flex-row min-h-screen container mx-auto">
+        <aside className="w-full lg:mt-24">
+          <img src={signup} alt="" className="mx-auto" />
         </aside>
-        <div className="w-full lg:w-[55%] flex justify-center items-center mt-20">
-          <div className="bg-white w-full lg:w-[60%] mx-auto py-6 sm:py-8 lg:py-12">
+        <div className="w-full flex justify-center items-center ">
+          <div className=" w-full lg:w-11/12 mx-auto py-6 sm:py-8 lg:py-12 ">
             <div className="max-w-screen-2xl px-4 md:px-8 mx-auto">
               <h2 className="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8">
                 Register Now
@@ -175,7 +179,7 @@ const SignUp = () => {
 
               <form
                 onSubmit={handleSubmit}
-                className="max-w-lg border rounded-lg mx-auto"
+                className="max-w-lg border rounded-xl shadow-lg mx-auto"
               >
                 <div className="flex flex-col gap-4 p-4 md:p-8">
                   <div>
@@ -216,6 +220,7 @@ const SignUp = () => {
                       onChange={handlePassword}
                       required
                       name="password"
+                      type="password"
                       className="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
                     />
                     {error && (
@@ -233,7 +238,7 @@ const SignUp = () => {
                       type="file"
                       required
                       name="photo"
-                      className="file-input file-input-bordered file-input-success w-full mb-2"
+                      className="file-input file-input-bordered file-input-transparent w-full mb-2 "
                     />
                   </div>
 
@@ -250,7 +255,7 @@ const SignUp = () => {
 
                   <div className="flex justify-center items-center relative">
                     <span className="h-px bg-gray-300 absolute inset-x-0"></span>
-                    <span className="bg-white text-gray-400 text-sm relative px-4">
+                    <span className="bg-base-100 text-gray-400 text-sm relative px-4">
                       Log in with social
                     </span>
                   </div>
@@ -283,10 +288,10 @@ const SignUp = () => {
 
                   <button
                     onClick={handleGoogle}
-                    className="flex justify-center items-center bg-white hover:bg-gray-100 active:bg-gray-200 border border-gray-300 focus-visible:ring ring-gray-300 text-gray-800 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 gap-2 px-8 py-3"
+                    className="flex justify-center items-center bg-base-100 hover:bg-gray-100 active:bg-gray-200 border border-gray-300 focus-visible:ring ring-gray-300 text-gray-800 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 gap-2 px-8 py-3"
                   >
                     {loading ? (
-                      <div className="w-8 h-8 border-4 border-dashed rounded-full animate-spin dark:border-green-400"></div>
+                      <div className="w-8 h-8 border-4 border-dashed rounded-full animate-spin dark:border-teal-300"></div>
                     ) : (
                       <>
                         <svg
@@ -320,12 +325,12 @@ const SignUp = () => {
                   </button>
                 </div>
 
-                <div className="flex justify-center items-center bg-gray-100 p-4">
+                <div className="flex justify-center items-center bg-gray-100 p-4 mb-10">
                   <p className="text-gray-500 text-sm text-center">
                     Already have an account?{" "}
                     <Link
                       to="/login"
-                      className="text-indigo-500 hover:text-indigo-600 active:text-indigo-700 transition duration-100"
+                      className="text-indigo-500 hover:text-indigo-600 active:text-indigo-700 transition duration-100 font-bold"
                     >
                       Login
                     </Link>

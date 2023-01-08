@@ -5,11 +5,13 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import logo from "../../assets/Hark.png";
 import { AuthContext } from "../../UserContext";
-import { Switch } from "@headlessui/react";
+import useLoggedUser from "../../hooks/useLoggedUser";
 
 const Navbar = () => {
-  const { loggedUser, logOut, setTheme } = useContext(AuthContext);
+  const { logOut, setTheme, user } = useContext(AuthContext);
   const [isDark, setIsDark] = useState(false);
+
+  const [loggedUser] = useLoggedUser(user?.email);
 
   const handleLogout = () => {
     logOut().then(() => {
@@ -22,14 +24,14 @@ const Navbar = () => {
         <div className="navbar-start gap-4">
           <div className="avatar">
             <div className="w-12 rounded">
-              <img src={logo} alt="Logo" className="border border-green-400" />
+              <img src={logo} alt="Logo" className="border border-teal-300" />
             </div>
           </div>
           <div className="form-control">
             <input
               type="text"
               placeholder="Search"
-              className="input input-bordered border-green-400"
+              className="input input-bordered border-teal-300"
             />
           </div>
         </div>
@@ -37,28 +39,28 @@ const Navbar = () => {
         <div className="navbar-end gap-6">
           <Link
             to="/"
-            className="flex flex-col items-center cursor-pointer text-green-400"
+            className="flex flex-col items-center cursor-pointer text-teal-400"
           >
             <FaHome className="text-xl" />
             <p>Home</p>
           </Link>
-          <Link className="flex flex-col items-center cursor-pointer text-green-400">
+          <Link className="flex flex-col items-center cursor-pointer text-teal-400">
             <FaUser className="text-xl" />
-            <div className="dropdown dropdown-hover">
+            <div className="dropdown dropdown-hover dropdown-end">
               <label tabIndex={0}>Profile</label>
               <ul
                 tabIndex={0}
                 className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
               >
                 <li>
-                  <Link to={`/user/${loggedUser._id}`}>View Profile</Link>
+                  <Link to={`/user/${loggedUser?._id}`}>View Profile</Link>
                 </li>
               </ul>
             </div>
           </Link>
-          <Link className="flex flex-col items-center cursor-pointer text-green-400">
+          <Link className="flex flex-col items-center cursor-pointer text-teal-400">
             <FiSettings className="text-xl" />
-            <div className="dropdown dropdown-hover">
+            <div className="dropdown dropdown-hover dropdown-end">
               <label tabIndex={0}>Settings</label>
               <ul
                 tabIndex={0}
@@ -82,7 +84,7 @@ const Navbar = () => {
                       </span>
                     ) : (
                       <span
-                        onClick={() => setTheme("luxury")}
+                        onClick={() => setTheme("night")}
                         className="flex items-center gap-4"
                       >
                         <svg

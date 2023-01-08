@@ -10,7 +10,7 @@ const Post = () => {
   const [showCommentBox, setShowCommentBox] = useState(false);
 
   return (
-    <div className="flex flex-col border p-6 space-y-6 overflow-hidden rounded-lg shadow-md  bg-white border-green-400 w-full mx-auto">
+    <div className="flex flex-col border p-6 space-y-6 overflow-hidden rounded-lg shadow-md  bg-base-100 border-teal-300 w-full mx-auto">
       <div className="flex justify-between">
         <div className="flex space-x-4">
           <img
@@ -29,7 +29,7 @@ const Post = () => {
             <span className="text-xs dark:text-gray-400">4 hours ago</span>
           </div>
         </div>
-        <div className="flex items-center gap-4 text-green-400 cursor-pointer">
+        <div className="flex items-center gap-4 text-teal-400 cursor-pointer">
           <FaPlus />
           <p>Follow</p>
         </div>
@@ -103,7 +103,7 @@ const Post = () => {
               <input
                 type="text"
                 placeholder="Write comment"
-                className="input w-full input-bordered border-green-400 rounded-full py-2"
+                className="input w-full input-bordered border-teal-300 rounded-full py-2"
               />
             </div>
           </div>

@@ -12,6 +12,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import app from "./firebase.config";
+import { useQuery } from "@tanstack/react-query";
 
 // Create Context
 export const AuthContext = createContext();
@@ -31,9 +32,9 @@ const UserContext = ({ children }) => {
   // theme
   const [theme, setTheme] = useState("light");
   // users
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
   // logged in user
-  const [loggedUser, setLoggedUser] = useState({});
+  // const [loggedUser, setLoggedUser] = useState({});
 
   // user inspection
   useEffect(() => {
@@ -45,20 +46,47 @@ const UserContext = ({ children }) => {
     return () => unsubscribe;
   }, []);
 
-  useEffect(() => {
-    fetch("http://localhost:5000/users")
-      .then((res) => res.json())
-      .then((data) => setUsers(data));
-  }, []);
+  // useEffect(() => {
+  //   fetch("http://localhost:5000/users")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setUsers(data)
+  //     });
+  // }, []);
+
+  // const { data: users, refetch } = useQuery({
+  //   queryKey: ['users'],
+  //   queryFn: async () => {
+  //     const res = await fetch(`http://localhost:5000/users`);
+  //     const data = res.json();
+  //     // console.log(data);
+  //     return data;
+  //   }
+  // })
+
 
   // get logged in user
-  useEffect(() => {
-    if (user?.email) {
-      fetch(`http://localhost:5000/single-user?email=${user?.email}`)
-        .then((res) => res.json())
-        .then((data) => setLoggedUser(data));
-    }
-  }, [user?.email]);
+  // useEffect(() => {
+  //   if (user?.email) {
+  //     fetch(`http://localhost:5000/single-user?email=${user?.email}`)
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         setLoggedUser(data);
+  //       });
+  //   }
+  // }, [user?.email]);
+
+  // const { data: loggedUser } = useQuery({
+  //   queryKey: ['loggedUser'],
+  //   queryFn: async () => {
+  //     if (user?.email) {
+  //       const res = await fetch(`http://localhost:5000/single-user?email=${user?.email}`);
+  //       const data = res.json();
+  //       return data;
+  //     }
+  //   }
+  // })
+
 
   // create user
   const createUser = (email, password) => {
@@ -110,8 +138,8 @@ const UserContext = ({ children }) => {
     logOut,
     theme,
     setTheme,
-    users,
-    loggedUser,
+    // users,
+    // loggedUser,
   };
   return (
     <div>

@@ -4,8 +4,8 @@ import Feed from "./Feed";
 
 const Contacts = () => {
   return (
-    <div>
-      <div className="card mb-10 bg-base-100 border border-green-400 shadow-xl">
+    <div className="sticky top-0">
+      <div className="card mb-10 bg-base-100 border border-teal-300 shadow-xl">
         <div className="card-body">
           <h2 className="card-title flex justify-between">
             Following <FaInfo />
@@ -22,7 +22,7 @@ const Contacts = () => {
                 Managing Director of Noman Group of Industries & Talha Group |
                 CIP |
               </small>
-              <button className="btn btn-outline rounded-full text-green-400 flex gap-2 items-center mt-4">
+              <button className="btn btn-outline rounded-full text-teal-400 flex gap-2 items-center mt-4">
                 <FaEye /> View Profile
               </button>
             </div>
@@ -39,7 +39,7 @@ const Contacts = () => {
                 Managing Director of Noman Group of Industries & Talha Group |
                 CIP |
               </small>
-              <button className="btn btn-outline rounded-full text-green-400 flex gap-2 items-center mt-4">
+              <button className="btn btn-outline rounded-full text-teal-400 flex gap-2 items-center mt-4">
                 <FaEye /> View Profile
               </button>
             </div>
@@ -56,7 +56,7 @@ const Contacts = () => {
                 Managing Director of Noman Group of Industries & Talha Group |
                 CIP |
               </small>
-              <button className="btn btn-outline rounded-full text-green-400 flex gap-2 items-center mt-4">
+              <button className="btn btn-outline rounded-full text-teal-400 flex gap-2 items-center mt-4">
                 <FaEye /> View Profile
               </button>
             </div>
