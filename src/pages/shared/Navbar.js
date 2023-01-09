@@ -6,12 +6,14 @@ import Swal from "sweetalert2";
 import logo from "../../assets/Hark.png";
 import { AuthContext } from "../../UserContext";
 import useLoggedUser from "../../hooks/useLoggedUser";
+import loadingImg from "../../assets/loading (2).gif";
 
 const Navbar = () => {
   const { logOut, setTheme, user } = useContext(AuthContext);
   const [isDark, setIsDark] = useState(false);
 
-  const [loggedUser] = useLoggedUser(user?.email);
+  const [loggedUser, isUserLoading] = useLoggedUser(user?.email);
+  console.log(loggedUser._id, isUserLoading);
 
   const handleLogout = () => {
     logOut().then(() => {

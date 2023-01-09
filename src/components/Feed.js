@@ -12,7 +12,7 @@ const Feed = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/users?email=${user?.email}`)
+    fetch(`https://harkrx-server.vercel.app/users?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

@@ -47,7 +47,7 @@ const UserContext = ({ children }) => {
   }, []);
 
   // useEffect(() => {
-  //   fetch("http://localhost:5000/users")
+  //   fetch("https://harkrx-server.vercel.app/users")
   //     .then((res) => res.json())
   //     .then((data) => {
   //       setUsers(data)
@@ -57,7 +57,7 @@ const UserContext = ({ children }) => {
   // const { data: users, refetch } = useQuery({
   //   queryKey: ['users'],
   //   queryFn: async () => {
-  //     const res = await fetch(`http://localhost:5000/users`);
+  //     const res = await fetch(`https://harkrx-server.vercel.app/users`);
   //     const data = res.json();
   //     // console.log(data);
   //     return data;
@@ -68,7 +68,7 @@ const UserContext = ({ children }) => {
   // get logged in user
   // useEffect(() => {
   //   if (user?.email) {
-  //     fetch(`http://localhost:5000/single-user?email=${user?.email}`)
+  //     fetch(`https://harkrx-server.vercel.app/single-user?email=${user?.email}`)
   //       .then((res) => res.json())
   //       .then((data) => {
   //         setLoggedUser(data);
@@ -80,7 +80,7 @@ const UserContext = ({ children }) => {
   //   queryKey: ['loggedUser'],
   //   queryFn: async () => {
   //     if (user?.email) {
-  //       const res = await fetch(`http://localhost:5000/single-user?email=${user?.email}`);
+  //       const res = await fetch(`https://harkrx-server.vercel.app/single-user?email=${user?.email}`);
   //       const data = res.json();
   //       return data;
   //     }

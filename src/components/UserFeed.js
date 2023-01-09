@@ -8,6 +8,7 @@ const UserFeed = () => {
   // const email = "rafsanchowdhuryrudro@gmail.co";
   const { user } = useContext(AuthContext);
   const profileUser = useLoaderData();
+  console.log(profileUser);
 
   return (
     <section>
