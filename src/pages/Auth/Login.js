@@ -33,14 +33,31 @@ const Login = () => {
         setLoading(false);
       });
   };
+  // google log in
   const handleGoogle = (e) => {
     setLoading(true);
     e.preventDefault();
     googleLogin()
       .then((res) => {
-        Swal.fire("Success", "Google Log In", "success");
-        setLoading(false);
-        navigate(from, { replace: true });
+        const user = {
+          name: res?.user?.displayName,
+          email: res?.user?.email,
+          img: res?.user?.photoURL,
+        };
+        fetch("https://harkrx-server.vercel.app/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(user),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            Swal.fire("Success", "Google Log In", "success");
+            setLoading(false);
+
+            navigate("/");
+          });
       })
       .catch((err) => {
         Swal.fire("Opps", err.message, "error");
@@ -48,17 +65,34 @@ const Login = () => {
       });
   };
 
+  // facebook log in
   const handleFacebook = () => {
     setLoading(true);
     facebookLogin()
       .then((res) => {
-        Swal.fire("Success", "Facebook Log In", "success");
-        setLoading(false);
-        navigate(from, { replace: true });
+        const user = {
+          name: res?.user?.displayName,
+          email: res?.user?.email,
+          img: res?.user?.photoURL,
+        };
+        fetch("https://harkrx-server.vercel.app/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(user),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            Swal.fire("Success", "Facebook Log In", "success");
+            setLoading(false);
+
+            navigate("/");
+          });
       })
       .catch((err) => {
-        Swal.fire("Opps", err.message, "error");
         setLoading(false);
+        Swal.fire("Opps", err.message, "error");
       });
   };
 

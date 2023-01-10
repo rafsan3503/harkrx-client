@@ -23,9 +23,8 @@ const router = createBrowserRouter([
     element: <SignUp />,
   },
   {
-    path: "/user/:id",
-    loader: ({ params }) =>
-      fetch(`https://harkrx-server.vercel.app/user/${params.id}`),
+    path: "/user",
+
     element: (
       <PrivateRoutes>
         <User />

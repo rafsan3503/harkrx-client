@@ -8,7 +8,6 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
-  TwitterAuthProvider,
   updateProfile,
 } from "firebase/auth";
 import app from "./firebase.config";
@@ -49,17 +48,42 @@ const UserContext = ({ children }) => {
   // useEffect(() => {
   //   fetch("https://harkrx-server.vercel.app/users")
   //     .then((res) => res.json())
-  //     .then((data) => setUsers(data));
+  //     .then((data) => {
+  //       setUsers(data)
+  //     });
   // }, []);
+
+  // const { data: users, refetch } = useQuery({
+  //   queryKey: ['users'],
+  //   queryFn: async () => {
+  //     const res = await fetch(`https://harkrx-server.vercel.app/users`);
+  //     const data = res.json();
+  //     // console.log(data);
+  //     return data;
+  //   }
+  // })
 
   // get logged in user
   // useEffect(() => {
   //   if (user?.email) {
   //     fetch(`https://harkrx-server.vercel.app/single-user?email=${user?.email}`)
   //       .then((res) => res.json())
-  //       .then((data) => setLoggedUser(data));
+  //       .then((data) => {
+  //         setLoggedUser(data);
+  //       });
   //   }
   // }, [user?.email]);
+
+  // const { data: loggedUser } = useQuery({
+  //   queryKey: ['loggedUser'],
+  //   queryFn: async () => {
+  //     if (user?.email) {
+  //       const res = await fetch(`https://harkrx-server.vercel.app/single-user?email=${user?.email}`);
+  //       const data = res.json();
+  //       return data;
+  //     }
+  //   }
+  // })
 
   // create user
   const createUser = (email, password) => {
@@ -111,6 +135,7 @@ const UserContext = ({ children }) => {
     logOut,
     theme,
     setTheme,
+    setLoading,
     // users,
     // loggedUser,
   };

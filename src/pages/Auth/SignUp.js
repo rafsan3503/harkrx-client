@@ -60,12 +60,15 @@ const SignUp = () => {
                 })
                   .then((res) => res.json())
                   .then((data) => {
-                    console.log(data);
-                  });
-                Swal.fire("Success", "User created successfully", "success");
-                setLoading(false);
+                    Swal.fire(
+                      "Success",
+                      "User created successfully",
+                      "success"
+                    );
+                    setLoading(false);
 
-                navigate("/");
+                    navigate("/");
+                  });
               })
               .catch((err) => {
                 setLoading(false);
@@ -99,12 +102,11 @@ const SignUp = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
-          });
-        Swal.fire("Success", "Google Log In", "success");
-        setLoading(false);
+            Swal.fire("Success", "Google Log In", "success");
+            setLoading(false);
 
-        navigate("/");
+            navigate("/");
+          });
       })
       .catch((err) => {
         Swal.fire("Opps", err.message, "error");
@@ -131,12 +133,11 @@ const SignUp = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
-          });
-        Swal.fire("Success", "Facebook Log In", "success");
-        setLoading(false);
+            Swal.fire("Success", "Facebook Log In", "success");
+            setLoading(false);
 
-        navigate("/");
+            navigate("/");
+          });
       })
       .catch((err) => {
         setLoading(false);
@@ -164,7 +165,7 @@ const SignUp = () => {
     setPassword(pass);
   };
   return (
-    <section >
+    <section>
       <AuthNavbar />
       <section className="flex flex-col lg:flex-row min-h-screen container mx-auto">
         <aside className="w-full lg:mt-24">
