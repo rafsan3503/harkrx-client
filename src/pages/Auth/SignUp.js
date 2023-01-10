@@ -61,11 +61,13 @@ const SignUp = () => {
                   .then((res) => res.json())
                   .then((data) => {
                     console.log(data);
-                  });
-                Swal.fire("Success", "User created successfully", "success");
-                setLoading(false);
+                    Swal.fire("Success", "User created successfully", "success");
 
-                navigate("/");
+
+                    navigate("/");
+                    setLoading(false);
+                  });
+
               })
               .catch((err) => {
                 setLoading(false);
@@ -100,11 +102,13 @@ const SignUp = () => {
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
-          });
-        Swal.fire("Success", "Google Log In", "success");
-        setLoading(false);
+            Swal.fire("Success", "Google Log In", "success");
 
-        navigate("/");
+
+            navigate("/");
+            setLoading(false);
+          });
+
       })
       .catch((err) => {
         Swal.fire("Opps", err.message, "error");
@@ -132,11 +136,13 @@ const SignUp = () => {
           .then((res) => res.json())
           .then((data) => {
             console.log(data);
-          });
-        Swal.fire("Success", "Facebook Log In", "success");
-        setLoading(false);
+            Swal.fire("Success", "Facebook Log In", "success");
 
-        navigate("/");
+
+            navigate("/");
+            setLoading(false);
+          });
+
       })
       .catch((err) => {
         setLoading(false);
