@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layouts/Main";
 import Login from "../pages/Auth/Login";
 import SignUp from "../pages/Auth/SignUp";
+import FeedUser from "../pages/FeedUser";
 import User from "../pages/User";
 import PrivateRoutes from "./PrivateRoutes";
 
@@ -28,6 +29,15 @@ const router = createBrowserRouter([
     element: (
       <PrivateRoutes>
         <User />
+      </PrivateRoutes>
+    ),
+  },
+  {
+    path: "/feedUser/:id",
+    loader: ({ params }) => fetch(`https://harkrx-server.vercel.app/user/${params.id}`),
+    element: (
+      <PrivateRoutes>
+        <FeedUser />
       </PrivateRoutes>
     ),
   },

@@ -30,7 +30,7 @@ const CoverModal = ({ currentUser, refetch, modalOpen, setModalOpen }) => {
       .then((data) => {
         const img = data.data.url;
 
-        fetch(`http://localhost:5000/cover/${currentUser._id}`, {
+        fetch(`https://harkrx-server.vercel.app/cover/${currentUser._id}`, {
           method: "PUT",
           headers: {
             "content-type": "application/json",

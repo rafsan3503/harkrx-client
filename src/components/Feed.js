@@ -8,20 +8,17 @@ const Feed = () => {
   const { user } = useContext(AuthContext);
 
   const [users, setUsers] = useState([]);
+  const [count, setCount] = useState(3);
 
   useEffect(() => {
-    fetch(`https://harkrx-server.vercel.app/users?email=${user?.email}`)
+    fetch(
+      `https://harkrx-server.vercel.app/users?email=${user?.email}&count=${count}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setUsers(data);
       });
-  }, [user?.email]);
-
-  // console.log(users);
-  // const userList = users?.filter((usr) => usr.email !== user.email);
-  // console.log(userList);
-
-  // const { loggedUser } = useContext(AuthContext);
+  }, [user?.email, count]);
 
   return (
     <div className="card bg-base-100 border border-teal-300 shadow-xl ">
@@ -32,8 +29,7 @@ const Feed = () => {
           </h2>
           {users.map((user) => (
             <Link
-              to={`/user/${user._id}`}
-              state={{ profileUser: user }}
+              to={`/feedUser/${user._id}`}
               key={user._id}
               className="my-2 flex gap-4 items-start"
             >
@@ -55,7 +51,10 @@ const Feed = () => {
             </Link>
           ))}
 
-          <p className="flex gap-4 text-lg items-center ">
+          <p
+            className="flex gap-4 text-lg items-center "
+            onClick={() => setCount(0)}
+          >
             View all <FaArrowRight />
           </p>
         </div>

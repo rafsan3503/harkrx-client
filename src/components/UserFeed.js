@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import AboutModals from "../modals/AboutModals";
 import CoverModal from "../modals/CoverModal";
 import DetailsModal from "../modals/DetailsModal";
+import ImageModal from "../modals/ImageModal";
 import { AuthContext } from "../UserContext";
 import Post from "./Post";
 import WritePost from "./WritePost";
@@ -34,12 +35,20 @@ const UserFeed = ({ currentUser, refetch }) => {
           )}
         </div>
 
-        <div className="-mt-32">
-          <div className="avatar pl-14">
-            <div className="w-48 rounded-full ring ring-white ring-offset-base-100 ring-offset-2">
-              <img src={currentUser?.img} alt="" />
+        <div className="-mt-32 relative">
+          <label
+            for="image-modal"
+            className="avatar pl-14 "
+            onClick={() => setModalOpen(true)}
+          >
+            <div className="w-48  rounded-full ring ring-white ring-offset-base-100 ring-offset-2">
+              <img
+                src={currentUser?.img}
+                alt=""
+                className="hover:hero-overlay"
+              />
             </div>
-          </div>
+          </label>
         </div>
 
         <div className="flex justify-between px-14 pt-6 mb-8 relative">
@@ -136,6 +145,12 @@ const UserFeed = ({ currentUser, refetch }) => {
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
       />
+      <ImageModal
+        currentUser={currentUser}
+        refetch={refetch}
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+      ></ImageModal>
       <CoverModal
         currentUser={currentUser}
         refetch={refetch}
