@@ -1,4 +1,3 @@
-import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useEffect, useState } from "react";
 import { FaInfo, FaPlus, FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -8,17 +7,14 @@ const Feed = () => {
   const { user } = useContext(AuthContext);
 
   const [users, setUsers] = useState([]);
-  const [count, setCount] = useState(3);
 
   useEffect(() => {
-    fetch(
-      `https://harkrx-server.vercel.app/users?email=${user?.email}&count=${count}`
-    )
+    fetch(`https://harkrx-server.vercel.app/users?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setUsers(data);
       });
-  }, [user?.email, count]);
+  }, [user?.email]);
 
   return (
     <div className="card bg-base-100 border border-teal-300 shadow-xl ">
@@ -27,7 +23,7 @@ const Feed = () => {
           <h2 className="card-title flex justify-between">
             Add to your feed <FaInfo />
           </h2>
-          {users.map((user) => (
+          {users.slice(0, 3).map((user) => (
             <Link
               to={`/feedUser/${user._id}`}
               key={user._id}
@@ -51,12 +47,9 @@ const Feed = () => {
             </Link>
           ))}
 
-          <p
-            className="flex gap-4 text-lg items-center "
-            onClick={() => setCount(0)}
-          >
+          <Link to="/allUsers" className="flex gap-4 text-lg items-center ">
             View all <FaArrowRight />
-          </p>
+          </Link>
         </div>
       </div>
     </div>

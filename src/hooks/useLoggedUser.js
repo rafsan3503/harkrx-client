@@ -1,22 +1,19 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 const useLoggedUser = (email) => {
-  const [loggedUser, setLoggedUser] = useState({});
-
-  const [userLoading, setUserLoading] = useState(true);
-
-  useEffect(() => {
-    if (email) {
-      fetch(`https://harkrx-server.vercel.app/single-user?email=${email}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setLoggedUser(data);
-          setUserLoading(false);
-        });
-    }
-  }, [email]);
-
-  return [loggedUser, userLoading];
+  const {
+    data: loggedUser,
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["loggedUser"],
+    queryFn: () =>
+      fetch(`https://harkrx-server.vercel.app/single-user?email=${email}`).then(
+        (res) => res.json()
+      ),
+  });
+  console.log(email, loggedUser);
+  return { loggedUser, isLoading, refetch };
 };
 
 export default useLoggedUser;

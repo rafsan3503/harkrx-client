@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import useLoggedUser from "../hooks/useLoggedUser";
 import { AuthContext } from "../UserContext";
 
 const Profile = () => {
   const { user } = useContext(AuthContext);
 
-  const [loggedUser] = useLoggedUser(user?.email);
+  const { loggedUser } = useLoggedUser(user?.email);
   // const [loggedUser, setLoggedUser] = useState({});
 
   // useEffect(() => {
@@ -21,14 +21,18 @@ const Profile = () => {
   return (
     <div className="sticky top-0">
       <div className="border border-teal-300 rounded-lg bg-base-100 overflow-hidden">
-        <img src={loggedUser.img} alt="" className="h-28 object-cover w-full" />
+        <img
+          src={loggedUser?.img}
+          alt=""
+          className="h-28 object-cover w-full"
+        />
         <div className="avatar -mt-12 flex justify-center">
           <div className="w-24 rounded-full">
-            <img src={loggedUser.img} alt="" />
+            <img src={loggedUser?.img} alt="" />
           </div>
         </div>
         <div className="my-6 text-center">
-          <h2 className="text-xl font-medium">{loggedUser.name}</h2>
+          <h2 className="text-xl font-medium">{loggedUser?.name}</h2>
           <p className="mt-2">
             Mern Stack Web Developer || React Js || Javascript || Mongo DB ||
             Node Js
