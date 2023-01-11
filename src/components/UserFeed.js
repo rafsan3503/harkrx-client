@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { FaMinus, FaPencilAlt, FaPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import AboutModals from "../modals/AboutModals";
+import CoverModal from "../modals/CoverModal";
 import DetailsModal from "../modals/DetailsModal";
 import ImageModal from "../modals/ImageModal";
 import { AuthContext } from "../UserContext";
@@ -9,7 +10,6 @@ import Post from "./Post";
 import WritePost from "./WritePost";
 
 const UserFeed = ({ currentUser, refetch }) => {
-
   const { user } = useContext(AuthContext);
   const [modalOpen, setModalOpen] = useState(true);
   const [isWrite, setIsWrite] = useState(false);
@@ -24,9 +24,12 @@ const UserFeed = ({ currentUser, refetch }) => {
             className="h-80 rounded-xl w-full object-cover"
           />
           {user?.email === currentUser?.email && (
-            <div className="p-4 absolute top-10 right-10 text-teal-400 bg-base-100 rounded-full border border-teal-300">
+            <label
+              htmlFor="cover-modal"
+              className="p-4 absolute top-10 right-10 text-teal-400 bg-base-100 rounded-full border border-teal-300"
+            >
               <FaPencilAlt className="text-xl" />
-            </div>
+            </label>
           )}
         </div>
 
@@ -35,7 +38,7 @@ const UserFeed = ({ currentUser, refetch }) => {
             <div className="w-48 rounded-full ring ring-white ring-offset-base-100 ring-offset-2">
               <img src={currentUser?.img} alt="" />
               <div className="absolute top-32 left-32">
-                <label htmlFor="image-modal" className="btn btn-outline" onClick={() => setModalOpen(true)}>
+                <label htmlFor="image-modal" className="btn btn-outline">
                   <FaPencilAlt className="text-xl" />
                 </label>
               </div>
@@ -144,6 +147,7 @@ const UserFeed = ({ currentUser, refetch }) => {
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
       ></ImageModal>
+      <CoverModal />
     </section>
   );
 };

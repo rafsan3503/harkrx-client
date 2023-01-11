@@ -33,7 +33,6 @@ const Feed = () => {
           {users.map((user) => (
             <Link
               to={`/feedUser/${user._id}`}
-              state={{ profileUser: user }}
               key={user._id}
               className="my-2 flex gap-4 items-start"
             >
