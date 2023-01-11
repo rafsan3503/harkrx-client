@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { FaMinus, FaPencilAlt, FaPlus } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import AboutModals from "../modals/AboutModals";
+import CoverModal from "../modals/CoverModal";
 import DetailsModal from "../modals/DetailsModal";
 import { AuthContext } from "../UserContext";
 import Post from "./Post";
@@ -22,9 +23,12 @@ const UserFeed = ({ currentUser, refetch }) => {
             className="h-80 rounded-xl w-full object-cover"
           />
           {user?.email === currentUser?.email && (
-            <div className="p-4 absolute top-10 right-10 text-teal-400 bg-base-100 rounded-full border border-teal-300">
+            <label
+              htmlFor="cover-modal"
+              className="p-4 absolute top-10 right-10 text-teal-400 bg-base-100 rounded-full border border-teal-300"
+            >
               <FaPencilAlt className="text-xl" />
-            </div>
+            </label>
           )}
         </div>
 
@@ -130,6 +134,7 @@ const UserFeed = ({ currentUser, refetch }) => {
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
       />
+      <CoverModal />
     </section>
   );
 };
