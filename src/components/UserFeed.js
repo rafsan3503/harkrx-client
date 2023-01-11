@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { FaMinus, FaPencilAlt, FaPlus } from "react-icons/fa";
+import logo from "../assets/Hark.png";
 import { Link } from "react-router-dom";
 import AboutModals from "../modals/AboutModals";
 import CoverModal from "../modals/CoverModal";
@@ -18,13 +19,14 @@ const UserFeed = ({ currentUser, refetch }) => {
       <div className="border border-teal-300 rounded-xl bg-base-100">
         <div className="p-4 relative">
           <img
-            src="https://images.unsplash.com/photo-1671725501928-b7d85698ccd8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+            src={currentUser?.cover ? currentUser?.cover : logo}
             alt=""
-            className="h-80 rounded-xl w-full object-cover"
+            className="h-80 rounded-xl w-auto mx-auto object-cover"
           />
           {user?.email === currentUser?.email && (
             <label
               htmlFor="cover-modal"
+              onClick={() => setModalOpen(true)}
               className="p-4 absolute top-10 right-10 text-teal-400 bg-base-100 rounded-full border border-teal-300"
             >
               <FaPencilAlt className="text-xl" />
@@ -134,7 +136,12 @@ const UserFeed = ({ currentUser, refetch }) => {
         modalOpen={modalOpen}
         setModalOpen={setModalOpen}
       />
-      <CoverModal />
+      <CoverModal
+        currentUser={currentUser}
+        refetch={refetch}
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+      />
     </section>
   );
 };
