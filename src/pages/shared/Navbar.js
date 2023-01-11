@@ -5,21 +5,26 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import logo from "../../assets/Hark.png";
 import { AuthContext } from "../../UserContext";
-import useLoggedUser from "../../hooks/useLoggedUser";
-import loadingImg from "../../assets/loading (2).gif";
 
 const Navbar = () => {
   const { logOut, setTheme, user } = useContext(AuthContext);
   const [isDark, setIsDark] = useState(false);
 
-  const [loggedUser, isUserLoading] = useLoggedUser(user?.email);
-  console.log(loggedUser._id, isUserLoading);
+  const handleToggle = () => {
+    setIsDark(!isDark);
+    if (isDark) {
+      setTheme("light");
+    } else {
+      setTheme("night");
+    }
+  };
 
   const handleLogout = () => {
     logOut().then(() => {
       Swal.fire("Success", "Logout Success", "success");
     });
   };
+
   return (
     <div className="bg-base-100 shadow-md">
       <div className="navbar  container mx-auto">
@@ -46,7 +51,7 @@ const Navbar = () => {
             <FaHome className="text-xl" />
             <p>Home</p>
           </Link>
-          <Link className="flex flex-col items-center cursor-pointer text-teal-400">
+          <div className="flex flex-col items-center cursor-pointer text-teal-400">
             <FaUser className="text-xl" />
             <div className="dropdown dropdown-hover dropdown-end">
               <label tabIndex={0}>Profile</label>
@@ -55,11 +60,11 @@ const Navbar = () => {
                 className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
               >
                 <li>
-                  <Link to={`/user/${loggedUser?._id}`}>View Profile</Link>
+                  <Link to="/user">View Profile</Link>
                 </li>
               </ul>
             </div>
-          </Link>
+          </div>
           <Link className="flex flex-col items-center cursor-pointer text-teal-400">
             <FiSettings className="text-xl" />
             <div className="dropdown dropdown-hover dropdown-end">
@@ -68,13 +73,10 @@ const Navbar = () => {
                 tabIndex={0}
                 className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
               >
-                <li onClick={() => setIsDark(!isDark)}>
+                <li onClick={() => handleToggle()}>
                   <label>
                     {isDark ? (
-                      <span
-                        onClick={() => setTheme("light")}
-                        className="flex gap-4 items-center"
-                      >
+                      <span className="flex gap-4 items-center">
                         <svg
                           className="swap-on fill-current w-10 h-10"
                           xmlns="http://www.w3.org/2000/svg"
@@ -85,10 +87,7 @@ const Navbar = () => {
                         <p>Light</p>
                       </span>
                     ) : (
-                      <span
-                        onClick={() => setTheme("night")}
-                        className="flex items-center gap-4"
-                      >
+                      <span className="flex items-center gap-4">
                         <svg
                           className="swap-off fill-current w-10 h-10"
                           xmlns="http://www.w3.org/2000/svg"

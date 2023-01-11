@@ -1,14 +1,18 @@
-import React, { useContext } from "react";
-import { FaPencilAlt } from "react-icons/fa";
-import { Link, useLoaderData } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { FaMinus, FaPencilAlt, FaPlus } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import AboutModals from "../modals/AboutModals";
+import DetailsModal from "../modals/DetailsModal";
+import ImageModal from "../modals/ImageModal";
 import { AuthContext } from "../UserContext";
 import Post from "./Post";
+import WritePost from "./WritePost";
 
-const UserFeed = () => {
-  // const email = "rafsanchowdhuryrudro@gmail.co";
+const UserFeed = ({ currentUser, refetch }) => {
+
   const { user } = useContext(AuthContext);
-  const profileUser = useLoaderData();
-  console.log(profileUser);
+  const [modalOpen, setModalOpen] = useState(true);
+  const [isWrite, setIsWrite] = useState(false);
 
   return (
     <section>
@@ -19,7 +23,7 @@ const UserFeed = () => {
             alt=""
             className="h-80 rounded-xl w-full object-cover"
           />
-          {user?.email === profileUser?.email && (
+          {user?.email === currentUser?.email && (
             <div className="p-4 absolute top-10 right-10 text-teal-400 bg-base-100 rounded-full border border-teal-300">
               <FaPencilAlt className="text-xl" />
             </div>
@@ -29,71 +33,117 @@ const UserFeed = () => {
         <div className="-mt-32">
           <div className="avatar pl-14">
             <div className="w-48 rounded-full ring ring-white ring-offset-base-100 ring-offset-2">
-              <img src={profileUser?.img} alt="" />
+              <img src={currentUser?.img} alt="" />
+              <div className="absolute top-32 left-32">
+                <label htmlFor="image-modal" className="btn btn-outline" onClick={() => setModalOpen(true)}>
+                  <FaPencilAlt className="text-xl" />
+                </label>
+              </div>
             </div>
           </div>
         </div>
 
+
         <div className="flex justify-between px-14 pt-6 mb-8 relative">
           <div className="flex gap-6 ">
             <div>
-              <h2 className="text-5xl font-bold">{profileUser.name}</h2>
+              <h2 className="text-5xl font-bold">{currentUser?.name}</h2>
               <p className="text-xl mt-3">
-                Mern Stack Web Developer || React Js || Javascript || Mongo DB
-                || Node Js
+                {currentUser.headline
+                  ? currentUser?.headline
+                  : "please add headline"}
               </p>
               <p className="text-lg my-5">
-                Albama, United States{" "}
-                <Link className="text-blue-500 font-medium">
-                  Contact Info..
-                </Link>
+                {currentUser?.address
+                  ? currentUser?.address
+                  : "please add address"}
               </p>
               <div className="flex gap-4 ">
-                {user?.email === profileUser?.email && (
-                  <div className="p-4 absolute top-10 right-10 text-teal-400 bg-base-100 rounded-full border border-teal-300">
+                {user?.email === currentUser?.email && (
+                  <label className="p-4 absolute top-10 right-10 text-teal-400 bg-base-100 rounded-full border border-teal-300">
                     <FaPencilAlt className="text-xl" />
-                  </div>
+                  </label>
                 )}
               </div>
             </div>
           </div>
           <div>
-            {user?.email === profileUser?.email && (
-              <div className="p-4 absolute top-10 right-10 text-teal-400 bg-base-100 rounded-full border border-teal-300">
+            {user?.email === currentUser?.email && (
+              <label
+                for="details-modal"
+                onClick={() => setModalOpen(true)}
+                className="p-4 absolute top-10 right-10 text-teal-400 bg-base-100 rounded-full border border-teal-300"
+              >
                 <FaPencilAlt className="text-xl" />
-              </div>
+              </label>
             )}
           </div>
         </div>
       </div>
-      <section className="mt-6 border border-teal-300 rounded-lg bg-base-100 relative">
-        <div className="flex justify-between px-10 py-4 w-full items-center mt-6">
+      <section className="mt-6 py-10 border border-teal-300 rounded-lg bg-base-100 relative">
+        <div className="flex justify-between px-10 py-6 w-full items-center mt-6">
           <h2 className="text-3xl font-medium">About</h2>
-          {user.email === profileUser.email && (
-            <div className="p-4 absolute top-10 right-10 text-teal-400 bg-base-100 rounded-full border border-teal-300">
+          {user?.email === currentUser?.email && (
+            <label
+              for="about-modal"
+              onClick={() => setModalOpen(true)}
+              className="p-4 absolute top-10 right-10 text-teal-400 bg-base-100 rounded-full border border-teal-300"
+            >
               <FaPencilAlt className="text-xl" />
-            </div>
+            </label>
           )}
         </div>
+
         <p className="text-xl mb-6 px-10">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste qui fuga
-          commodi quaerat distinctio vel saepe eaque inventore odio consequatur?
+          {currentUser?.about
+            ? currentUser?.about
+            : "Please add about yourself"}
         </p>
       </section>
       <section className="mt-6 border border-teal-300 rounded-lg bg-base-100 relative">
         <div className="flex justify-between px-10 py-4 w-full items-center mt-6">
           <h2 className="text-3xl font-medium">Posts</h2>
-          {user.email === profileUser.email && (
-            <div className="p-4 absolute top-10 right-10 text-teal-400 bg-base-100 rounded-full border border-teal-300">
-              <FaPencilAlt className="text-xl" />
+          {user?.email === currentUser?.email && (
+            <div
+              onClick={() => setIsWrite(!isWrite)}
+              className="p-4 absolute top-10 right-10 text-teal-400 bg-base-100 rounded-full border border-teal-300"
+            >
+              {isWrite ? (
+                <FaMinus className="text-xl" />
+              ) : (
+                <FaPlus className="text-xl" />
+              )}
             </div>
           )}
         </div>
+        {isWrite && (
+          <div className="p-10">
+            <WritePost />
+          </div>
+        )}
         <div className="grid grid-cols-1 gap-4 p-10">
           <Post />
           <Post />
         </div>
       </section>
+      <AboutModals
+        currentUser={currentUser}
+        refetch={refetch}
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+      />
+      <DetailsModal
+        currentUser={currentUser}
+        refetch={refetch}
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+      />
+      <ImageModal
+        currentUser={currentUser}
+        refetch={refetch}
+        modalOpen={modalOpen}
+        setModalOpen={setModalOpen}
+      ></ImageModal>
     </section>
   );
 };

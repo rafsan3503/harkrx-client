@@ -4,8 +4,6 @@ import { FaInfo, FaPlus, FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../UserContext";
 
-
-
 const Feed = () => {
   const { user } = useContext(AuthContext);
 
@@ -15,18 +13,15 @@ const Feed = () => {
     fetch(`https://harkrx-server.vercel.app/users?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        setUsers(data)
+        setUsers(data);
       });
   }, [user?.email]);
 
   // console.log(users);
-  const userList = users?.filter(usr => usr.email !== user.email);
-  console.log(userList);
+  // const userList = users?.filter((usr) => usr.email !== user.email);
+  // console.log(userList);
 
   // const { loggedUser } = useContext(AuthContext);
-
-
 
   return (
     <div className="card bg-base-100 border border-teal-300 shadow-xl ">
@@ -35,9 +30,10 @@ const Feed = () => {
           <h2 className="card-title flex justify-between">
             Add to your feed <FaInfo />
           </h2>
-          {userList.map((user) => (
+          {users.map((user) => (
             <Link
-              to={`/user/${user._id}`}
+              to={`/feedUser/${user._id}`}
+              state={{ profileUser: user }}
               key={user._id}
               className="my-2 flex gap-4 items-start"
             >

@@ -2,11 +2,10 @@ import React, { useContext } from "react";
 import { AuthContext } from "../UserContext";
 import loadingImg from "../assets/loading (2).gif";
 import { Navigate, useLocation } from "react-router-dom";
-import useLoggedUser from "../hooks/useLoggedUser";
 
 const PrivateRoutes = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
-  const [isUserLoading, loggedUser] = useLoggedUser(user?.email);
+
   const location = useLocation();
 
   if (loading) {
@@ -16,6 +15,7 @@ const PrivateRoutes = ({ children }) => {
       </div>
     );
   }
+
   if (user) {
     return children;
   }

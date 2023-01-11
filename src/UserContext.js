@@ -8,7 +8,6 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
-  TwitterAuthProvider,
   updateProfile,
 } from "firebase/auth";
 import app from "./firebase.config";
@@ -64,7 +63,6 @@ const UserContext = ({ children }) => {
   //   }
   // })
 
-
   // get logged in user
   // useEffect(() => {
   //   if (user?.email) {
@@ -86,7 +84,6 @@ const UserContext = ({ children }) => {
   //     }
   //   }
   // })
-
 
   // create user
   const createUser = (email, password) => {
@@ -138,6 +135,7 @@ const UserContext = ({ children }) => {
     logOut,
     theme,
     setTheme,
+    setLoading,
     // users,
     // loggedUser,
   };
