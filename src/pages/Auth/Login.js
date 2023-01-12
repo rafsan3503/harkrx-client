@@ -6,7 +6,8 @@ import { AuthContext } from "../../UserContext";
 import AuthNavbar from "./AuthNavbar";
 
 const Login = () => {
-  const { googleLogin, facebookLogin, loginUser } = useContext(AuthContext);
+  const { googleLogin, facebookLogin, loginUser, forgetPassword } =
+    useContext(AuthContext);
   const location = useLocation();
   const from = location.state?.from?.pathName || "/";
   const navigate = useNavigate();
@@ -96,6 +97,28 @@ const Login = () => {
       });
   };
 
+  // forget pass
+  const handleForget = async () => {
+    const { value: email } = await Swal.fire({
+      title: "Input email address",
+      input: "email",
+      inputLabel: "Your email address",
+      inputPlaceholder: "Enter your email address",
+    });
+
+    if (email) {
+      forgetPassword(email)
+        .then(() => {
+          Swal.fire(
+            "Email send!!",
+            `Password reset email send to : ${email}, please check your spam/junk folder`,
+            "success"
+          );
+        })
+        .catch((err) => Swal.fire(err.message));
+    }
+  };
+
   // setPass
   const handlePassword = (e) => {
     const pass = e.target.value;
@@ -126,7 +149,7 @@ const Login = () => {
           <div className="w-full lg:w-9/12 mx-auto py-6 sm:py-8 lg:py-12">
             <div className="w-full px-4 md:px-8 mx-auto">
               <h2 className="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8">
-                Join Now
+                Login Now
               </h2>
 
               <form
@@ -166,7 +189,12 @@ const Login = () => {
                       <small className="text-red-400 my-2">{error}</small>
                     )}
                   </div>
-
+                  <p
+                    onClick={handleForget}
+                    className="text-right hover:text-teal-400 cursor-pointer hover:underline "
+                  >
+                    forget password?
+                  </p>
                   <button
                     type="submit"
                     className="flex gap-2 justify-center bg-success hover:bg-green-400 active:bg-gray-600 focus-visible:ring ring-gray-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"

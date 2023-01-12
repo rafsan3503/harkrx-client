@@ -9,12 +9,23 @@ import ImageModal from "../modals/ImageModal";
 import { AuthContext } from "../UserContext";
 import Post from "./Post";
 import WritePost from "./WritePost";
+import Swal from "sweetalert2";
+import usePosts from "../hooks/usePosts";
 
 const UserFeed = ({ currentUser, refetch }) => {
   const { user } = useContext(AuthContext);
   const [modalOpen, setModalOpen] = useState(true);
   const [isWrite, setIsWrite] = useState(false);
+  const [isPending, setIsPending] = useState(false);
 
+  const handleVerification = () => {
+    setIsPending(true);
+    Swal.fire({
+      title: "Send!",
+      text: "Verification request send to admin!",
+      icon: "success",
+    });
+  };
   return (
     <section>
       <div className="border border-teal-300 rounded-xl bg-base-100">
@@ -78,6 +89,21 @@ const UserFeed = ({ currentUser, refetch }) => {
               >
                 Public view
               </Link>
+              {isPending ? (
+                <button
+                  onClick={handleVerification}
+                  className="btn ml-2 btn-disabled"
+                >
+                  Request pending
+                </button>
+              ) : (
+                <button
+                  onClick={handleVerification}
+                  className="btn btn-ghost ml-2 bg-teal-400 text-white"
+                >
+                  Request verification
+                </button>
+              )}
             </div>
           </div>
           <div>
@@ -134,10 +160,7 @@ const UserFeed = ({ currentUser, refetch }) => {
             <WritePost />
           </div>
         )}
-        <div className="grid grid-cols-1 gap-4 p-10">
-          <Post />
-          <Post />
-        </div>
+        <div className="grid grid-cols-1 gap-4 p-10"></div>
       </section>
       <AboutModals
         currentUser={currentUser}

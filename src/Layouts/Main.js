@@ -15,7 +15,7 @@ const Main = () => {
         <div className="w-[55%]">
           <RecentPosts />
         </div>
-        <div className="w-[25%]">
+        <div className="w-[25%] sticky top-0">
           <Feed />
         </div>
       </div>

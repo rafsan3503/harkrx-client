@@ -37,7 +37,7 @@ const User = () => {
         <div className="w-[75%]">
           <UserFeed currentUser={currentUser} refetch={refetch} />
         </div>
-        <div className="w-[25%]">
+        <div className="w-[25%] sticky">
           <Contacts />
         </div>
       </div>

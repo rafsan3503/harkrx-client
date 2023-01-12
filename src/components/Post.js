@@ -5,28 +5,32 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../UserContext";
 import userPhoto from "../assets/user.png";
 
-const Post = () => {
+const Post = ({ post }) => {
   const { user } = useContext(AuthContext);
   const [showCommentBox, setShowCommentBox] = useState(false);
+  const { description, imgUrl, authorName, authorId, date, authorImage } = post;
 
   return (
-    <div className="flex flex-col border p-6 space-y-6 overflow-hidden rounded-lg shadow-md  bg-base-100 border-teal-300 w-full mx-auto">
+    <div className="flex mt-4 flex-col border p-6 space-y-6 overflow-hidden rounded-lg shadow-md  bg-base-100 border-teal-300 w-full mx-auto">
       <div className="flex justify-between">
         <div className="flex space-x-4">
           <img
             alt=""
-            src="https://source.unsplash.com/100x100/?portrait"
+            src={authorImage}
             className="object-cover w-12 h-12 rounded-full shadow dark:bg-gray-500"
           />
           <div className="flex flex-col space-y-1">
-            <a
+            <Link
+              to={`/feedUser/${authorId}`}
               rel="noopener noreferrer"
               href="#"
               className="text-sm font-semibold"
             >
-              Leroy Jenkins
-            </a>
-            <span className="text-xs dark:text-gray-400">4 hours ago</span>
+              {authorName}
+            </Link>
+            <span className="text-xs dark:text-gray-400">
+              {date.slice(0, 10)}
+            </span>
           </div>
         </div>
         <div className="flex items-center gap-4 text-teal-400 cursor-pointer">
@@ -35,19 +39,14 @@ const Post = () => {
         </div>
       </div>
       <div>
-        <p className="my-5 text-xl">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure ipsum
-          vero sed, praesentium assumenda rem dolores iusto molestias ipsa error
-          laudantium blanditiis consectetur alias dicta voluptatibus veniam iste
-          atque ut dolorum consequatur incidunt omnis illum corrupti! Eligendi
-          nisi illum quae tenetur est enim, minima sapiente sit rerum. Ad, amet
-          placeat.
-        </p>
-        <img
-          src="https://images.unsplash.com/photo-1672872476232-da16b45c9001?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80"
-          alt=""
-          className="object-cover w-full mb-4 h-60 rounded-lg sm:h-96 dark:bg-gray-500"
-        />
+        <p className="my-5 text-xl">{description}</p>
+        {imgUrl && (
+          <img
+            src={imgUrl}
+            alt=""
+            className="object-cover w-full mb-4 h-60 rounded-lg sm:h-96 dark:bg-gray-500"
+          />
+        )}
       </div>
       <div className="flex justify-between">
         <div className="flex text-lg items-center">

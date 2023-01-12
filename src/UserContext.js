@@ -5,9 +5,11 @@ import {
   getAuth,
   GoogleAuthProvider,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updatePassword,
   updateProfile,
 } from "firebase/auth";
 import app from "./firebase.config";
@@ -117,6 +119,16 @@ const UserContext = ({ children }) => {
     });
   };
 
+  // forget password
+  const forgetPassword = (email) => {
+    return sendPasswordResetEmail(auth, email);
+  };
+
+  // update password
+  const newPassword = (password) => {
+    return updatePassword(auth.currentUser, password);
+  };
+
   // log out
   const logOut = () => {
     // setLoading(true);
@@ -136,8 +148,8 @@ const UserContext = ({ children }) => {
     theme,
     setTheme,
     setLoading,
-    // users,
-    // loggedUser,
+    forgetPassword,
+    newPassword,
   };
   return (
     <div>
