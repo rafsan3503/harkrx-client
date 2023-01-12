@@ -34,7 +34,15 @@ const Settings = () => {
             <div className="drawer drawer-mobile">
                 <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content">
-
+                    {/* 
+                    ------------
+                    ------------
+                    ------------
+                    drawer content here 
+                    ------------
+                    ------------
+                    ------------
+                    */}
                 </div>
                 <div className="drawer-side">
                     <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
