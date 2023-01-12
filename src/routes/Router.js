@@ -4,6 +4,7 @@ import AllUsers from "../pages/AllUsers";
 import Login from "../pages/Auth/Login";
 import SignUp from "../pages/Auth/SignUp";
 import FeedUser from "../pages/FeedUser";
+import Settings from "../pages/Settings";
 import User from "../pages/User";
 import PrivateRoutes from "./PrivateRoutes";
 
@@ -44,6 +45,15 @@ const router = createBrowserRouter([
     element: (
       <PrivateRoutes>
         <FeedUser />
+      </PrivateRoutes>
+    ),
+  },
+  {
+    path: "/settings",
+
+    element: (
+      <PrivateRoutes>
+        <Settings />
       </PrivateRoutes>
     ),
   },
