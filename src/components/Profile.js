@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import useLoggedUser from "../hooks/useLoggedUser";
 import { AuthContext } from "../UserContext";
+import logo from "../assets/Hark.png";
 
 const Profile = () => {
   const { user } = useContext(AuthContext);
@@ -22,7 +23,7 @@ const Profile = () => {
     <div className="sticky top-0">
       <div className="border border-teal-300 rounded-lg bg-base-100 overflow-hidden">
         <img
-          src={loggedUser?.img}
+          src={loggedUser?.cover ? loggedUser?.cover : logo}
           alt=""
           className="h-28 object-cover w-full"
         />
@@ -33,10 +34,7 @@ const Profile = () => {
         </div>
         <div className="my-6 text-center">
           <h2 className="text-xl font-medium">{loggedUser?.name}</h2>
-          <p className="mt-2">
-            Mern Stack Web Developer || React Js || Javascript || Mongo DB ||
-            Node Js
-          </p>
+          <p className="mt-2">{loggedUser?.headline}</p>
         </div>
         <hr />
         <div>

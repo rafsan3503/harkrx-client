@@ -72,6 +72,12 @@ const UserFeed = ({ currentUser, refetch }) => {
                   </label>
                 )}
               </div>
+              <Link
+                to={`/feedUser/${currentUser._id}`}
+                className="btn rounded-full bg-teal-400 border-none"
+              >
+                Public view
+              </Link>
             </div>
           </div>
           <div>
