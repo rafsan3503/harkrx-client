@@ -141,7 +141,7 @@ const Login = () => {
   return (
     <section>
       <AuthNavbar />
-      <section className="flex min-h-screen container mx-auto">
+      <section className="flex flex-col md:flex-row min-h-screen container mx-auto">
         <aside className="w-full ">
           <img src={login} alt="" className="mx-auto" />
         </aside>
