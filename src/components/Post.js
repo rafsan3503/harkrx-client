@@ -8,6 +8,7 @@ import { v4 as uuid } from "uuid";
 import userPhoto from "../assets/user.png";
 import useLoggedUser from "../hooks/useLoggedUser";
 import Swal from "sweetalert2";
+import { MdVerified } from "react-icons/md";
 
 const Post = ({ post, refetch }) => {
   const { user } = useContext(AuthContext);
@@ -25,8 +26,8 @@ const Post = ({ post, refetch }) => {
     date,
     authorImage,
     reports,
+    verificationStatus,
   } = post;
-  console.log(likes);
 
   const handleLike = (id) => {
     fetch(`https://harkrx-server.vercel.app/like/${id}`, {
@@ -103,9 +104,12 @@ const Post = ({ post, refetch }) => {
               to={`/feedUser/${authorId}`}
               rel="noopener noreferrer"
               href="#"
-              className="text-sm font-semibold"
+              className="text-sm font-semibold flex items-center gap-2"
             >
-              {authorName}
+              {authorName}{" "}
+              {verificationStatus === "verified" && (
+                <MdVerified className="text-blue-500 text-xl font-blue" />
+              )}
             </Link>
             <span className="text-xs dark:text-gray-400">
               {date.slice(0, 10)}

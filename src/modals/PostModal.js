@@ -37,6 +37,7 @@ const PostModal = ({ loggedUser, modalOpen, setModalOpen, refetch }) => {
       authorId: loggedUser?._id,
       authorName: loggedUser?.name,
       authorImage: loggedUser?.img,
+      verificationStatus: loggedUser?.verificationStatus,
     };
     fetch("https://harkrx-server.vercel.app/post", {
       method: "POST",

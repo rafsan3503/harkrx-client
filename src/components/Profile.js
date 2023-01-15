@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import useLoggedUser from "../hooks/useLoggedUser";
 import { AuthContext } from "../UserContext";
 import logo from "../assets/Hark.png";
+import { MdVerified } from "react-icons/md";
 
 const Profile = () => {
   const { user } = useContext(AuthContext);
@@ -33,7 +34,12 @@ const Profile = () => {
           </div>
         </div>
         <div className="my-6 text-center">
-          <h2 className="text-xl font-medium">{loggedUser?.name}</h2>
+          <h2 className="text-xl font-medium flex justify-center items-center gap-2">
+            {loggedUser?.name}{" "}
+            {loggedUser?.verificationStatus === "verified" && (
+              <MdVerified className="text-blue-500 text-xl font-blue" />
+            )}
+          </h2>
           <p className="mt-2">{loggedUser?.headline}</p>
         </div>
         <hr />
