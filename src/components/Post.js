@@ -148,17 +148,17 @@ const Post = ({ post, refetch }) => {
         </div>
       </div>
       <hr />
-      <div className="flex flex-wrap justify-evenly">
+      <div className="flex justify-evenly">
         <div className="dropdown dropdown-top dropdown-hover">
           {likes?.find((like) => like === loggedUser?._id) ? (
-            <label className="btn btn-disabled text-blue-500 text-xl gap-2">
+            <label className="btn btn-disabled text-blue-500 text-xs md:text-xl gap-1 md:gap-2">
               <BiLike />
               <p>Liked</p>
             </label>
           ) : (
             <label
               onClick={() => handleLike(_id)}
-              className="btn btn-ghost text-xl gap-2"
+              className="btn btn-ghost text-xs md:text-xl gap-1 md:gap-2"
             >
               <BiLike />
               <p>Like</p>
@@ -168,20 +168,20 @@ const Post = ({ post, refetch }) => {
 
         <button
           onClick={() => setShowCommentBox(true)}
-          className="btn btn-ghost text-xl gap-2"
+          className="btn btn-ghost text-xs md:text-xl gap-1 md:gap-2"
         >
           <BiComment />
           <p>Comment</p>
         </button>
         {reports?.find((report) => report === loggedUser?._id) ? (
-          <button className="btn btn-disabled text-xl gap-2">
+          <button className="btn btn-disabled text-xs md:text-xl gap-1 md:gap-2">
             <BiFlag />
             <p>Reported</p>
           </button>
         ) : (
           <button
             onClick={() => handleReport(_id)}
-            className="btn btn-ghost text-xl gap-2"
+            className="btn btn-ghost text-xs md:text-xl gap-1 md:gap-2"
           >
             <BiFlag />
             <p>Report</p>

@@ -24,11 +24,11 @@ const AllUsers = () => {
   return (
     <div>
       <Navbar />
-      <div className="container mx-auto py-6 min-h-screen flex gap-6 ">
-        <div className="w-[25%] sticky top-0">
+      <div className="container mx-auto py-6 min-h-screen flex flex-col md:flex-row gap-6 ">
+        <div className="w-full md:w-[25%] md:sticky md:top-0">
           <Profile />
         </div>
-        <div className="w-[75%]">
+        <div className="w-full md:w-[75%]">
           <AllUsersList allUsers={allUsers} />
         </div>
       </div>

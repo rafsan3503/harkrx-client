@@ -40,7 +40,7 @@ const UserFeed = ({ currentUser, refetch }) => {
           <img
             src={currentUser?.cover ? currentUser?.cover : logo}
             alt=""
-            className="h-80 rounded-xl w-auto mx-auto object-cover"
+            className="h-80 rounded-xl w-full mx-auto object-cover"
           />
           {user?.email === currentUser?.email && (
             <label
@@ -97,13 +97,13 @@ const UserFeed = ({ currentUser, refetch }) => {
               </div>
               <Link
                 to={`/feedUser/${currentUser._id}`}
-                className="btn rounded-full bg-teal-400 border-none"
+                className="btn rounded-full bg-teal-400 border-none mb-1"
               >
                 Public view
               </Link>
 
               {currentUser?.verificationStatus === "pending" && (
-                <button className="btn ml-2 btn-disabled">
+                <button className="btn md:ml-2 btn-disabled">
                   Request pending
                 </button>
               )}
@@ -111,7 +111,7 @@ const UserFeed = ({ currentUser, refetch }) => {
               {!currentUser.verificationStatus && (
                 <button
                   onClick={() => handleVerification(currentUser._id)}
-                  className="btn btn-ghost ml-2 bg-teal-400 text-white"
+                  className="btn btn-ghost md:ml-2 bg-teal-400 text-white"
                 >
                   Request verification
                 </button>

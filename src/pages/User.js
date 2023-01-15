@@ -33,11 +33,11 @@ const User = () => {
   return (
     <>
       <Navbar />
-      <div className="container mx-auto py-6 min-h-screen flex gap-6 ">
-        <div className="w-[75%]">
+      <div className="container mx-auto py-6 min-h-screen flex flex-col md:flex-row gap-6 ">
+        <div className="md:w-[75%]">
           <UserFeed currentUser={currentUser} refetch={refetch} />
         </div>
-        <div className="w-[25%] sticky">
+        <div className="md:w-[25%] md:sticky">
           <Contacts />
         </div>
       </div>

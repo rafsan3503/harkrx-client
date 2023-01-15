@@ -9,6 +9,7 @@ import SignUp from "../pages/Auth/SignUp";
 import FeedUser from "../pages/FeedUser";
 import Settings from "../pages/Settings";
 import User from "../pages/User";
+import AdminRoutes from "./AdminRoutes";
 import PrivateRoutes from "./PrivateRoutes";
 
 const router = createBrowserRouter([
@@ -66,11 +67,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/settings/verify-users",
-        element: <VerificationUsers />,
+        element: <AdminRoutes><VerificationUsers /></AdminRoutes>,
       },
       {
         path: "/settings/report-posts",
-        element: <ReportPosts />,
+        element: <AdminRoutes><ReportPosts /></AdminRoutes>,
       },
     ],
   },

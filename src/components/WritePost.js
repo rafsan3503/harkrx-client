@@ -14,7 +14,7 @@ const WritePost = ({ refetch }) => {
     <div className="card bg-base-100 border border-teal-300 mb-5 p-6 w-full">
       <div className="flex gap-2 items-center">
         <div className="avatar">
-          <div className="w-16 rounded-full">
+          <div className="w-12 md:w-16 rounded-full">
             <img src={loggedUser?.img} alt="" />
           </div>
         </div>

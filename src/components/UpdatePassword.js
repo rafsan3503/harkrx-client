@@ -23,7 +23,7 @@ const UpdatePassword = () => {
       .catch((err) => Swal.fire("Error", err.message, "error"));
   };
   return (
-    <div className="w-1/3 mx-auto">
+    <div className="md:w-1/3 mx-auto">
       <h2 className="text-3xl font-bold my-6">Update your password</h2>
       <form onSubmit={handleUpdatePassword} className="space-y-6">
         <div className="space-y-1 text-sm relative">

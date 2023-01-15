@@ -8,14 +8,14 @@ const Main = () => {
   return (
     <>
       <Navbar />
-      <div className="container mx-auto py-6 min-h-screen flex gap-6 ">
-        <div className="w-[20%]">
+      <div className="container mx-auto py-6 min-h-screen flex flex-col gap-6 md:flex-row">
+        <div className="w-full md:w-[20%] ">
           <Profile />
         </div>
-        <div className="w-[55%]">
+        <div className="w-full md:w-[55%]">
           <RecentPosts />
         </div>
-        <div className="w-[25%] sticky top-0">
+        <div className="w-full md:w-[25%] md:sticky md:top-0">
           <Feed />
         </div>
       </div>
