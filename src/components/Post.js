@@ -26,6 +26,7 @@ const Post = ({ post, refetch }) => {
     authorImage,
     reports,
   } = post;
+  console.log(likes);
 
   const handleLike = (id) => {
     fetch(`https://harkrx-server.vercel.app/like/${id}`, {
@@ -33,7 +34,7 @@ const Post = ({ post, refetch }) => {
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({ authorId }),
+      body: JSON.stringify({ authorId: loggedUser?._id }),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -145,7 +146,7 @@ const Post = ({ post, refetch }) => {
       <hr />
       <div className="flex flex-wrap justify-evenly">
         <div className="dropdown dropdown-top dropdown-hover">
-          {likes?.find((like) => like === authorId) ? (
+          {likes?.find((like) => like === loggedUser?._id) ? (
             <label className="btn btn-disabled text-blue-500 text-xl gap-2">
               <BiLike />
               <p>Liked</p>
