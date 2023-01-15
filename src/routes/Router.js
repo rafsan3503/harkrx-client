@@ -1,4 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
+import ReportPosts from "../components/ReportPosts";
+import UpdatePassword from "../components/UpdatePassword";
+import VerificationUsers from "../components/VerificationUsers";
 import Main from "../Layouts/Main";
 import AllUsers from "../pages/AllUsers";
 import Login from "../pages/Auth/Login";
@@ -56,6 +59,20 @@ const router = createBrowserRouter([
         <Settings />
       </PrivateRoutes>
     ),
+    children: [
+      {
+        path: "/settings/update-password",
+        element: <UpdatePassword />,
+      },
+      {
+        path: "/settings/verify-users",
+        element: <VerificationUsers />,
+      },
+      {
+        path: "/settings/report-posts",
+        element: <ReportPosts />,
+      },
+    ],
   },
 ]);
 

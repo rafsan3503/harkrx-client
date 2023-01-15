@@ -31,19 +31,19 @@ const AboutModals = ({ currentUser, refetch, modalOpen, setModalOpen }) => {
   return (
     modalOpen && (
       <div>
-        <input type="checkbox" id="about-modal" class="modal-toggle" />
-        <div class="modal">
-          <div class="modal-box relative">
+        <input type="checkbox" id="about-modal" className="modal-toggle" />
+        <div className="modal">
+          <div className="modal-box relative">
             <label
               for="about-modal"
-              class="btn btn-sm btn-circle absolute right-2 top-2"
+              className="btn btn-sm btn-circle absolute right-2 top-2"
             >
               ✕
             </label>
-            <h3 class="text-lg font-bold">About me</h3>
+            <h3 className="text-lg font-bold">About me</h3>
             <form onSubmit={handleAbout}>
               <textarea
-                class="textarea textarea-primary w-full my-5"
+                className="textarea textarea-primary w-full my-5"
                 placeholder="About"
                 name="about"
               ></textarea>

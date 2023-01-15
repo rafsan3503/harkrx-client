@@ -12,7 +12,7 @@ const useLoggedUser = (email) => {
         (res) => res.json()
       ),
   });
-  console.log(email, loggedUser);
+
   return { loggedUser, isLoading, refetch };
 };
 

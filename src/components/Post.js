@@ -1,14 +1,92 @@
 import React, { useContext, useState } from "react";
-import { FaPlus } from "react-icons/fa";
+import { FaDotCircle, FaPlus } from "react-icons/fa";
 import { BiComment, BiFlag, BiHeart, BiLike } from "react-icons/bi";
+import { BsThreeDots } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../UserContext";
+import { v4 as uuid } from "uuid";
 import userPhoto from "../assets/user.png";
+import useLoggedUser from "../hooks/useLoggedUser";
+import Swal from "sweetalert2";
 
-const Post = ({ post }) => {
+const Post = ({ post, refetch }) => {
   const { user } = useContext(AuthContext);
+  const { loggedUser } = useLoggedUser(user?.email);
   const [showCommentBox, setShowCommentBox] = useState(false);
-  const { description, imgUrl, authorName, authorId, date, authorImage } = post;
+
+  const {
+    _id,
+    description,
+    likes,
+    comments,
+    imgUrl,
+    authorName,
+    authorId,
+    date,
+    authorImage,
+    reports,
+  } = post;
+
+  const handleLike = (id) => {
+    fetch(`https://harkrx-server.vercel.app/like/${id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ authorId }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          refetch();
+        }
+      });
+  };
+
+  const handleComment = (e) => {
+    e.preventDefault();
+    const commentText = e.target.comment.value;
+    const comment = {
+      commentId: uuid(),
+      commentText,
+      authorId: loggedUser?._id,
+      authorImage: loggedUser?.img,
+      authorName: loggedUser?.name,
+      date: new Date(),
+    };
+
+    fetch(`https://harkrx-server.vercel.app/comment/${_id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(comment),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          refetch();
+          e.target.reset();
+        }
+      });
+  };
+
+  const handleReport = (id) => {
+    fetch(`https://harkrx-server.vercel.app/report/${id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ reportUserId: loggedUser?._id }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          refetch();
+          Swal.fire("Success!", "This post is reported to admin", "success");
+        }
+      });
+  };
 
   return (
     <div className="flex mt-4 flex-col border p-6 space-y-6 overflow-hidden rounded-lg shadow-md  bg-base-100 border-teal-300 w-full mx-auto">
@@ -52,30 +130,35 @@ const Post = ({ post }) => {
         <div className="flex text-lg items-center">
           <BiLike className="text-blue-500" />
           <BiHeart className="-ml-1 text-red-500" />
-          <span>3</span>
+          <span>{likes ? likes?.length : 0}</span>
         </div>
-        <div className="hover:text-blue-500 hover:underline">
-          <Link>2 comments</Link>
+        <div
+          onClick={() => setShowCommentBox(true)}
+          className="hover:text-blue-500 hover:underline"
+        >
+          <Link>
+            {comments ? comments.length : 0}{" "}
+            {comments?.length > 1 ? "comments" : "comment"}
+          </Link>
         </div>
       </div>
       <hr />
       <div className="flex flex-wrap justify-evenly">
         <div className="dropdown dropdown-top dropdown-hover">
-          <label tabIndex={0} className="btn btn-ghost text-xl gap-2">
-            <BiLike />
-            <p>Like</p>
-          </label>
-          <ul
-            tabIndex={0}
-            className="dropdown-content menu menu-horizontal p-2 shadow bg-base-100 rounded-box"
-          >
-            <li>
+          {likes?.find((like) => like === authorId) ? (
+            <label className="btn btn-disabled text-blue-500 text-xl gap-2">
               <BiLike />
-            </li>
-            <li>
-              <BiHeart />
-            </li>
-          </ul>
+              <p>Liked</p>
+            </label>
+          ) : (
+            <label
+              onClick={() => handleLike(_id)}
+              className="btn btn-ghost text-xl gap-2"
+            >
+              <BiLike />
+              <p>Like</p>
+            </label>
+          )}
         </div>
 
         <button
@@ -85,27 +168,55 @@ const Post = ({ post }) => {
           <BiComment />
           <p>Comment</p>
         </button>
-        <button className="btn btn-ghost text-xl gap-2">
-          <BiFlag />
-          <p>Report</p>
-        </button>
+        {reports?.find((report) => report === loggedUser?._id) ? (
+          <button className="btn btn-disabled text-xl gap-2">
+            <BiFlag />
+            <p>Reported</p>
+          </button>
+        ) : (
+          <button
+            onClick={() => handleReport(_id)}
+            className="btn btn-ghost text-xl gap-2"
+          >
+            <BiFlag />
+            <p>Report</p>
+          </button>
+        )}
       </div>
       {showCommentBox && (
         <div>
-          <div className="flex gap-2 items-center">
+          <div className="flex gap-2 mb-5 items-center">
             <div className="avatar">
               <div className="w-16 rounded-full">
-                <img src={user?.photoURL ? user.photoURL : userPhoto} alt="" />
+                <img src={loggedUser?.img} alt="" />
               </div>
             </div>
-            <div className="w-full">
+            <form onSubmit={handleComment} className="w-full">
               <input
                 type="text"
                 placeholder="Write comment"
+                name="comment"
                 className="input w-full input-bordered border-teal-300 rounded-full py-2"
               />
-            </div>
+            </form>
           </div>
+          <hr />
+          {comments &&
+            comments.map((comment) => (
+              <div className="flex my-4 gap-2 items-start">
+                <div className="avatar">
+                  <div className="w-10 rounded-full">
+                    <img src={comment?.authorImage} alt="" />
+                  </div>
+                </div>
+                <div className="bg-gray-300 p-4 w-full rounded-xl">
+                  <h3 className="text-lg font-medium flex items-center justify-between">
+                    {comment?.authorName} <BsThreeDots />
+                  </h3>
+                  <p className=" w-full">{comment?.commentText}</p>
+                </div>
+              </div>
+            ))}
         </div>
       )}
     </div>

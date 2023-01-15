@@ -7,24 +7,31 @@ import CoverModal from "../modals/CoverModal";
 import DetailsModal from "../modals/DetailsModal";
 import ImageModal from "../modals/ImageModal";
 import { AuthContext } from "../UserContext";
-import Post from "./Post";
+import { MdVerified } from "react-icons/md";
+
 import WritePost from "./WritePost";
 import Swal from "sweetalert2";
-import usePosts from "../hooks/usePosts";
 
 const UserFeed = ({ currentUser, refetch }) => {
   const { user } = useContext(AuthContext);
   const [modalOpen, setModalOpen] = useState(true);
   const [isWrite, setIsWrite] = useState(false);
-  const [isPending, setIsPending] = useState(false);
 
-  const handleVerification = () => {
-    setIsPending(true);
-    Swal.fire({
-      title: "Send!",
-      text: "Verification request send to admin!",
-      icon: "success",
-    });
+  const handleVerification = (id) => {
+    fetch(`https://harkrx-server.vercel.app/verify-request/${id}`, {
+      method: "PUT",
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          Swal.fire({
+            title: "Send!",
+            text: "Verification request send to admin!",
+            icon: "success",
+          });
+          refetch();
+        }
+      });
   };
   return (
     <section>
@@ -65,7 +72,12 @@ const UserFeed = ({ currentUser, refetch }) => {
         <div className="flex justify-between px-14 pt-6 mb-8 relative">
           <div className="flex gap-6 ">
             <div>
-              <h2 className="text-5xl font-bold">{currentUser?.name}</h2>
+              <h2 className="text-5xl font-bold flex gap-2 items-center">
+                {currentUser?.name}{" "}
+                {currentUser?.verificationStatus === "verified" && (
+                  <MdVerified className="text-blue-500 text-3xl font-blue" />
+                )}
+              </h2>
               <p className="text-xl mt-3">
                 {currentUser.headline
                   ? currentUser?.headline
@@ -89,16 +101,16 @@ const UserFeed = ({ currentUser, refetch }) => {
               >
                 Public view
               </Link>
-              {isPending ? (
-                <button
-                  onClick={handleVerification}
-                  className="btn ml-2 btn-disabled"
-                >
+
+              {currentUser?.verificationStatus === "pending" && (
+                <button className="btn ml-2 btn-disabled">
                   Request pending
                 </button>
-              ) : (
+              )}
+
+              {!currentUser.verificationStatus && (
                 <button
-                  onClick={handleVerification}
+                  onClick={() => handleVerification(currentUser._id)}
                   className="btn btn-ghost ml-2 bg-teal-400 text-white"
                 >
                   Request verification

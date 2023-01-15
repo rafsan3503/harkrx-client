@@ -7,7 +7,7 @@ import logo from "../../assets/Hark.png";
 import { AuthContext } from "../../UserContext";
 
 const Navbar = () => {
-  const { logOut, setTheme, newPassword } = useContext(AuthContext);
+  const { logOut, setTheme } = useContext(AuthContext);
   const [isDark, setIsDark] = useState(false);
 
   const handleToggle = () => {
@@ -25,26 +25,6 @@ const Navbar = () => {
     });
   };
 
-  const handleUpdatePassword = async () => {
-    const { value: password } = await Swal.fire({
-      title: "Input new password",
-      input: "password",
-      inputLabel: "Your New Password",
-      inputPlaceholder: "Enter your new password",
-    });
-
-    if (password) {
-      newPassword(password)
-        .then(() => {
-          Swal.fire(
-            "Password changed",
-            `Your password has been successfully updated!`,
-            "success"
-          );
-        })
-        .catch((err) => Swal.fire(err.message));
-    }
-  };
   return (
     <div className="bg-base-100 shadow-md">
       <div className="navbar  container mx-auto">
@@ -120,8 +100,9 @@ const Navbar = () => {
                     )}
                   </label>
                 </li>
-                <li onClick={handleUpdatePassword}>
-                  <label>Update Password</label>
+
+                <li>
+                  <Link to="/settings/update-password">Security</Link>
                 </li>
                 <li onClick={handleLogout}>
                   <p>

@@ -4,13 +4,13 @@ import Post from "./Post";
 import WritePost from "./WritePost";
 
 const RecentPosts = () => {
-  const { posts, isLoading, refetch } = usePosts();
+  const { posts, refetch } = usePosts();
 
   return (
     <section>
       <WritePost refetch={refetch} />
       {posts?.map((post) => (
-        <Post key={post._id} post={post} />
+        <Post key={post._id} post={post} refetch={refetch} />
       ))}
     </section>
   );

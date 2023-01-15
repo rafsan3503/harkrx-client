@@ -35,16 +35,16 @@ const DetailsModal = ({ currentUser, refetch, setModalOpen, modalOpen }) => {
   return (
     modalOpen && (
       <div>
-        <input type="checkbox" id="details-modal" class="modal-toggle" />
-        <div class="modal">
-          <div class="modal-box relative">
+        <input type="checkbox" id="details-modal" className="modal-toggle" />
+        <div className="modal">
+          <div className="modal-box relative">
             <label
               for="details-modal"
-              class="btn btn-sm btn-circle absolute right-2 top-2"
+              className="btn btn-sm btn-circle absolute right-2 top-2"
             >
               ✕
             </label>
-            <h3 class="text-lg font-bold">Full Information</h3>
+            <h3 className="text-lg font-bold">Full Information</h3>
             <form onSubmit={handleInformation} className="my-5">
               <div>
                 <label htmlFor="name">Name</label>
