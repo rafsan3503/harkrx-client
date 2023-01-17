@@ -15,7 +15,7 @@ const Navbar = ({ children }) => {
     if (isDark) {
       setTheme("light");
     } else {
-      setTheme("night");
+      setTheme("dark");
     }
   };
 

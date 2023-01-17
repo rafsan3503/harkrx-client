@@ -8,7 +8,7 @@ import bgShape from "../src/assets/bg-shape.png";
 function App() {
   const { theme } = useContext(AuthContext);
   return (
-    <div style={{ backgroundImage: `url(${bgShape})` }} data-theme={theme}>
+    <div className="bg-green-200 dark:bg-green-400" data-theme={theme}>
       <RouterProvider router={router} />
     </div>
   );

@@ -245,7 +245,7 @@ const SignUp = () => {
 
                   <button
                     type="submit"
-                    className="flex gap-2 justify-center bg-success hover:bg-green-400 active:bg-gray-600 focus-visible:ring ring-gray-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
+                    className="flex gap-2 justify-center bg-success hover:bg-base-100 active:bg-gray-600 focus-visible:ring ring-gray-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
                   >
                     {loading ? (
                       <div className="w-8 h-8 border-4 border-dashed rounded-full animate-spin dark:border-white"></div>
@@ -289,7 +289,7 @@ const SignUp = () => {
 
                   <button
                     onClick={handleGoogle}
-                    className="flex justify-center items-center bg-base-100 hover:bg-gray-100 active:bg-gray-200 border border-gray-300 focus-visible:ring ring-gray-300 text-gray-800 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 gap-2 px-8 py-3"
+                    className="flex justify-center items-center bg-base-100 hover:bg-base-100 active:bg-gray-200 border border-gray-300 focus-visible:ring ring-gray-300 text-gray-800 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 gap-2 px-8 py-3"
                   >
                     {loading ? (
                       <div className="w-8 h-8 border-4 border-dashed rounded-full animate-spin dark:border-teal-300"></div>
@@ -326,7 +326,7 @@ const SignUp = () => {
                   </button>
                 </div>
 
-                <div className="flex justify-center items-center bg-gray-100 p-4 mb-10">
+                <div className="flex justify-center items-center bg-base-100 p-4 mb-10">
                   <p className="text-gray-500 text-sm text-center">
                     Already have an account?{" "}
                     <Link
