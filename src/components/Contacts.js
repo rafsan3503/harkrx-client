@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { FaArrowRight, FaEye, FaInfo } from "react-icons/fa";
+import { FaEye, FaInfo } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import useLoggedUser from "../hooks/useLoggedUser";
 import { AuthContext } from "../UserContext";
@@ -9,7 +9,7 @@ const Contacts = () => {
   const { user } = useContext(AuthContext);
   const { loggedUser } = useLoggedUser(user?.email);
   const followedUsers = loggedUser?.followedUser;
-  console.log(followedUsers);
+
   return (
     <div className="sticky top-0">
       <div className="card mb-10 bg-base-100 border border-teal-300 shadow-xl">

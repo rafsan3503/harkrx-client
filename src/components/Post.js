@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
-import { FaDotCircle, FaPlus } from "react-icons/fa";
+import { FaCheck, FaDotCircle, FaPlus } from "react-icons/fa";
 import { BiComment, BiFlag, BiHeart, BiLike } from "react-icons/bi";
-import { BsThreeDots } from "react-icons/bs";
+import { BsThreeDots, BsTrash } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../UserContext";
 import { v4 as uuid } from "uuid";
@@ -9,11 +9,13 @@ import userPhoto from "../assets/user.png";
 import useLoggedUser from "../hooks/useLoggedUser";
 import Swal from "sweetalert2";
 import { MdVerified } from "react-icons/md";
+import useUsers from "../hooks/useUsers";
 
 const Post = ({ post, refetch }) => {
   const { user } = useContext(AuthContext);
-  const { loggedUser } = useLoggedUser(user?.email);
+  const { loggedUser, refetch: userRefetch } = useLoggedUser(user?.email);
   const [showCommentBox, setShowCommentBox] = useState(false);
+  const { users } = useUsers();
 
   const {
     _id,
@@ -28,6 +30,11 @@ const Post = ({ post, refetch }) => {
     reports,
     verificationStatus,
   } = post;
+
+  const followedUser = loggedUser?.followedUser;
+  // console.log(followedUser);
+  // const isFollowed = ;
+  // console.log(isFollowed);
 
   const handleLike = (id) => {
     fetch(`https://harkrx-server.vercel.app/like/${id}`, {
@@ -90,6 +97,29 @@ const Post = ({ post, refetch }) => {
       });
   };
 
+  const handleFollow = (id) => {
+    // console.log(id);
+    const user = users?.find(usr => usr._id === id);
+    console.log(user);
+    fetch(`https://harkrx-server.vercel.app/follow-user/${loggedUser?._id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          userRefetch();
+          Swal.fire({
+            title: `You are following ${user.name}`,
+            icon: "success",
+          });
+        }
+      });
+  };
+
   return (
     <div className="flex mt-4 flex-col border p-6 space-y-6 overflow-hidden rounded-lg shadow-md  bg-base-100 border-teal-300 w-full mx-auto">
       <div className="flex justify-between">
@@ -116,10 +146,19 @@ const Post = ({ post, refetch }) => {
             </span>
           </div>
         </div>
-        <div className="flex items-center gap-4 text-teal-400 cursor-pointer">
-          <FaPlus />
-          <p>Follow</p>
-        </div>
+
+        {
+          followedUser?.find(followed => followed?._id === authorId) ?
+            <div className="flex items-center gap-4 text-teal-400 cursor-pointer">
+              <FaCheck />
+              <p>Following</p>
+            </div>
+            :
+            <div onClick={() => handleFollow(authorId)} className="flex items-center gap-4 text-teal-400 cursor-pointer">
+              <FaPlus />
+              <p>Follow</p>
+            </div>
+        }
       </div>
       <div>
         <p className="my-5 text-xl">{description}</p>
@@ -134,7 +173,7 @@ const Post = ({ post, refetch }) => {
       <div className="flex justify-between">
         <div className="flex text-lg items-center">
           <BiLike className="text-blue-500" />
-          <BiHeart className="-ml-1 text-red-500" />
+          {/* <BiHeart className="-ml-1 text-red-500" /> */}
           <span>{likes ? likes?.length : 0}</span>
         </div>
         <div
@@ -214,9 +253,9 @@ const Post = ({ post, refetch }) => {
                     <img src={comment?.authorImage} alt="" />
                   </div>
                 </div>
-                <div className="bg-gray-300 p-4 w-full rounded-xl">
+                <div className="bg-base-300 p-4 w-full rounded-xl">
                   <h3 className="text-lg font-medium flex items-center justify-between">
-                    {comment?.authorName} <BsThreeDots />
+                    {comment?.authorName}
                   </h3>
                   <p className=" w-full">{comment?.commentText}</p>
                 </div>

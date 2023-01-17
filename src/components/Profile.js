@@ -3,22 +3,15 @@ import useLoggedUser from "../hooks/useLoggedUser";
 import { AuthContext } from "../UserContext";
 import logo from "../assets/Hark.png";
 import { MdVerified } from "react-icons/md";
+import usePosts from "../hooks/usePosts";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const { user } = useContext(AuthContext);
+  const { posts } = usePosts();
 
   const { loggedUser } = useLoggedUser(user?.email);
-  // const [loggedUser, setLoggedUser] = useState({});
-
-  // useEffect(() => {
-  //   if (user?.email) {
-  //     fetch(`https://harkrx-server.vercel.app/single-user?email=${user?.email}`)
-  //       .then((res) => res.json())
-  //       .then((data) => {
-  //         setLoggedUser(data);
-  //       });
-  //   }
-  // }, [user?.email]);
+  const userPosts = posts?.filter((post) => post?.authorId === loggedUser?._id);
 
   return (
     <div className="sticky top-0">
@@ -45,23 +38,21 @@ const Profile = () => {
         <hr />
         <div>
           <button className="btn btn-ghost flex justify-between w-full">
-            Total Following <span>30</span>
+            Total Following{" "}
+            <span>{loggedUser ? loggedUser.followedUser?.length : 0}</span>
           </button>
           <button className="btn btn-ghost flex justify-between w-full">
-            Total Posts <span>30</span>
+            Total Posts <span>{userPosts ? userPosts?.length : 0}</span>
           </button>
         </div>
       </div>
       <div className="border border-teal-300 rounded-lg overflow-hidden mt-4 ">
         <ul className="menu menu-compact lg:menu-normal bg-base-100 w-full p-2 rounded-box ">
           <li>
-            <a>Groups</a>
+            <Link to="/user">View profile</Link>
           </li>
           <li>
-            <a>Events</a>
-          </li>
-          <li>
-            <a>Followers</a>
+            <Link to="/allUsers">Find people</Link>
           </li>
         </ul>
       </div>

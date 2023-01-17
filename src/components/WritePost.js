@@ -28,7 +28,7 @@ const WritePost = ({ refetch }) => {
           </p>
         </label>
       </div>
-      <div className="mt-5">
+      {/* <div className="mt-5">
         <button className="btn btn-ghost">
           <h2 className="text-md text-teal-400 flex items-center gap-4">
             <FaPhotoVideo />
@@ -41,7 +41,7 @@ const WritePost = ({ refetch }) => {
             Post
           </h2>
         </button>
-      </div>
+      </div> */}
       <PostModal
         loggedUser={loggedUser}
         modalOpen={modalOpen}

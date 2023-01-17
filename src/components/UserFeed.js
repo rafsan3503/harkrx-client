@@ -11,11 +11,16 @@ import { MdVerified } from "react-icons/md";
 
 import WritePost from "./WritePost";
 import Swal from "sweetalert2";
+import usePosts from "../hooks/usePosts";
+import Post from "./Post";
 
 const UserFeed = ({ currentUser, refetch }) => {
   const { user } = useContext(AuthContext);
   const [modalOpen, setModalOpen] = useState(true);
   const [isWrite, setIsWrite] = useState(false);
+  const { posts, refetch: postRefetch } = usePosts();
+
+  const userPost = posts?.filter(post => post.authorId === currentUser._id);
 
   const handleVerification = (id) => {
     fetch(`https://harkrx-server.vercel.app/verify-request/${id}`, {
@@ -168,11 +173,15 @@ const UserFeed = ({ currentUser, refetch }) => {
           )}
         </div>
         {isWrite && (
-          <div className="p-10">
-            <WritePost />
+          <div className="pt-10 px-10">
+            <WritePost refetch={postRefetch} />
           </div>
         )}
-        <div className="grid grid-cols-1 gap-4 p-10"></div>
+        <div className="grid grid-cols-1 gap-4 p-10">
+          {
+            userPost?.map(post => <Post post={post} refetch={postRefetch}></Post>)
+          }
+        </div>
       </section>
       <AboutModals
         currentUser={currentUser}

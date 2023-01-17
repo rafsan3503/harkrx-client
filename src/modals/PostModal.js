@@ -3,8 +3,10 @@ import Swal from "sweetalert2";
 
 const PostModal = ({ loggedUser, modalOpen, setModalOpen, refetch }) => {
   const [image, setImage] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleImage = (e) => {
+    setLoading(true);
     const img = e.target.files[0];
 
     const img_api = "3be428566b26b7c4478e29333a90fdba";
@@ -22,6 +24,7 @@ const PostModal = ({ loggedUser, modalOpen, setModalOpen, refetch }) => {
       .then((image) => {
         const imgbbUrl = image.data.url;
         setImage(imgbbUrl);
+        setLoading(false);
       });
   };
 
@@ -92,6 +95,7 @@ const PostModal = ({ loggedUser, modalOpen, setModalOpen, refetch }) => {
                 <button
                   type="submit"
                   className="btn btn-primary mt-5 justify-end"
+                  disabled={loading}
                 >
                   Post
                 </button>

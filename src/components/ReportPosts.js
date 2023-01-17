@@ -17,7 +17,7 @@ const ReportPosts = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/post/${id}`, {
+        fetch(`https://harkrx-server.vercel.app/post/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
