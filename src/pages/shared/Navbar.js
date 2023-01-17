@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import logo from "../../assets/Hark.png";
 import { AuthContext } from "../../UserContext";
 
-const Navbar = () => {
+const Navbar = ({ children }) => {
   const { logOut, setTheme } = useContext(AuthContext);
   const [isDark, setIsDark] = useState(false);
 
@@ -34,16 +34,9 @@ const Navbar = () => {
               <img src={logo} alt="Logo" className="border border-teal-300" />
             </div>
           </div>
-          <div className="form-control">
-            <input
-              type="text"
-              placeholder="Search"
-              className="input input-bordered border-teal-300"
-            />
-          </div>
         </div>
 
-        <div className="navbar-end gap-6">
+        <div className="navbar-end items-start flex gap-6">
           <Link
             to="/"
             className="flex flex-col items-center cursor-pointer text-teal-400"
@@ -112,6 +105,9 @@ const Navbar = () => {
               </ul>
             </div>
           </Link>
+
+          {children}
+
         </div>
       </div>
     </div>
